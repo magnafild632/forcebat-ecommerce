@@ -644,6 +644,63 @@
       if (phone && phoneElem) phoneElem.innerText = phone;
       if (email && emailElem) emailElem.innerText = email;
       if (address && addressElem) addressElem.innerText = address;
+
+      // Actualizar enlaces del menú utilizando querySelectorAll en lugar de IDs
+      var navLinks = document.querySelectorAll('header nav ul li a');
+      for (var k = 0; k < navLinks.length && k < 6; k++) {
+        var storedName2 = localStorage.getItem('menuName' + k);
+        var storedLink2 = localStorage.getItem('menuLink' + k);
+        if (storedName2) navLinks[k].innerText = storedName2;
+        if (storedLink2) navLinks[k].setAttribute('href', storedLink2);
+      }
+
+      // Generar productos dinámicamente
+      var defaultProducts = [
+        { name: 'Batería Forcebat Estándar 60Ah', price: '600.000', image: 'battery.png' },
+        { name: 'Batería Forcebat Premium 75Ah', price: '750.000', image: 'battery.png' },
+        { name: 'Batería Forcebat Ultra 90Ah', price: '950.000', image: 'battery.png' },
+        { name: 'Batería Forcebat Compact 45Ah', price: '450.000', image: 'battery.png' },
+        { name: 'Batería Forcebat Pro 100Ah', price: '1.100.000', image: 'battery.png' },
+        { name: 'Batería Forcebat Eco 50Ah', price: '500.000', image: 'battery.png' }
+      ];
+      var count = parseInt(localStorage.getItem('productCount'));
+      if (isNaN(count) || count < 1) {
+        count = defaultProducts.length;
+      }
+      var grid = document.querySelector('.product-grid');
+      if (grid) {
+        grid.innerHTML = '';
+        for (var j = 0; j < count; j++) {
+          var pNameStored = localStorage.getItem('productName' + j);
+          var pPriceStored = localStorage.getItem('productPrice' + j);
+          var pImgStored = localStorage.getItem('productImage' + j);
+          var def = defaultProducts[j] || { name: 'Producto ' + (j + 1), price: '0', image: 'battery.png' };
+          var name = pNameStored || def.name;
+          var price = pPriceStored || def.price;
+          var image = pImgStored || def.image;
+          var card = document.createElement('div');
+          card.className = 'product-card';
+          var imgEl = document.createElement('img');
+          imgEl.src = image;
+          imgEl.alt = name;
+          var nameEl = document.createElement('h3');
+          nameEl.innerText = name;
+          var priceEl = document.createElement('div');
+          priceEl.className = 'price';
+          priceEl.innerText = 'Gs ' + price;
+          var btnEl = document.createElement('a');
+          btnEl.href = 'https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat';
+          btnEl.className = 'btn whatsapp';
+          btnEl.setAttribute('target', '_blank');
+          btnEl.setAttribute('rel', 'noopener');
+          btnEl.innerText = 'Comprar por WhatsApp';
+          card.appendChild(imgEl);
+          card.appendChild(nameEl);
+          card.appendChild(priceEl);
+          card.appendChild(btnEl);
+          grid.appendChild(card);
+        }
+      }
     });
   </script>
 
