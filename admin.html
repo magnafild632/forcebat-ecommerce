@@ -159,6 +159,52 @@
     .product-card .form-group {
       width: 100%;
     }
+    /* Vista previa del menú */
+    .menu-preview {
+      background: #000;
+      padding: 10px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    .menu-preview nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+    .menu-preview nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 4px;
+      transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+    .menu-preview nav ul li a:hover {
+      background: #ffc600;
+      color: #000;
+    }
+    .menu-form .menu-item-edit {
+      margin-bottom: 20px;
+    }
+    /* Estilos para la sección de contacto */
+    .contact-preview {
+      background: #fafafa;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .contact-preview div {
+      margin-bottom: 6px;
+    }
+    .contact-preview .label {
+      font-weight: 600;
+      margin-right: 5px;
+    }
     @media (max-width: 600px) {
       .product-card {
         width: 100%;
@@ -315,6 +361,107 @@
     </div>
   </div>
 
+  <!-- Card para editar el menú -->
+  <div class="card" id="menu-edit">
+    <h2>Editar Menú</h2>
+    <div class="menu-preview">
+      <nav>
+        <ul>
+          <li><a id="navItem0" href="#inicio">Inicio</a></li>
+          <li><a id="navItem1" href="#productos">Productos</a></li>
+          <li><a id="navItem2" href="#servicios">Servicios</a></li>
+          <li><a id="navItem3" href="#comofunciona">Cómo funciona</a></li>
+          <li><a id="navItem4" href="#opiniones">Opiniones</a></li>
+          <li><a id="navItem5" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="menu-form">
+      <div class="menu-item-edit">
+        <div class="form-group">
+          <label for="menu-name0">Nombre del ítem 1:</label>
+          <input type="text" id="menu-name0" value="Inicio">
+        </div>
+        <div class="form-group">
+          <label for="menu-link0">Enlace del ítem 1:</label>
+          <input type="text" id="menu-link0" value="#inicio">
+        </div>
+      </div>
+      <div class="menu-item-edit">
+        <div class="form-group">
+          <label for="menu-name1">Nombre del ítem 2:</label>
+          <input type="text" id="menu-name1" value="Productos">
+        </div>
+        <div class="form-group">
+          <label for="menu-link1">Enlace del ítem 2:</label>
+          <input type="text" id="menu-link1" value="#productos">
+        </div>
+      </div>
+      <div class="menu-item-edit">
+        <div class="form-group">
+          <label for="menu-name2">Nombre del ítem 3:</label>
+          <input type="text" id="menu-name2" value="Servicios">
+        </div>
+        <div class="form-group">
+          <label for="menu-link2">Enlace del ítem 3:</label>
+          <input type="text" id="menu-link2" value="#servicios">
+        </div>
+      </div>
+      <div class="menu-item-edit">
+        <div class="form-group">
+          <label for="menu-name3">Nombre del ítem 4:</label>
+          <input type="text" id="menu-name3" value="Cómo funciona">
+        </div>
+        <div class="form-group">
+          <label for="menu-link3">Enlace del ítem 4:</label>
+          <input type="text" id="menu-link3" value="#comofunciona">
+        </div>
+      </div>
+      <div class="menu-item-edit">
+        <div class="form-group">
+          <label for="menu-name4">Nombre del ítem 5:</label>
+          <input type="text" id="menu-name4" value="Opiniones">
+        </div>
+        <div class="form-group">
+          <label for="menu-link4">Enlace del ítem 5:</label>
+          <input type="text" id="menu-link4" value="#opiniones">
+        </div>
+      </div>
+      <div class="menu-item-edit">
+        <div class="form-group">
+          <label for="menu-name5">Nombre del ítem 6:</label>
+          <input type="text" id="menu-name5" value="Contacto">
+        </div>
+        <div class="form-group">
+          <label for="menu-link5">Enlace del ítem 6:</label>
+          <input type="text" id="menu-link5" value="#contacto">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card para editar la información de contacto -->
+  <div class="card" id="contact-edit">
+    <h2>Editar Información de Contacto</h2>
+    <div class="contact-preview">
+      <div><span class="label">Teléfono:</span><span id="previewPhone">+595 0971 325695</span></div>
+      <div><span class="label">Correo electrónico:</span><span id="previewEmail">info@forcebat.com</span></div>
+      <div><span class="label">Dirección:</span><span id="previewAddress">Ciudad del Este, Paraguay</span></div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Teléfono:</label>
+      <input type="text" id="phone" value="+595 0971 325695">
+    </div>
+    <div class="form-group">
+      <label for="email">Correo electrónico:</label>
+      <input type="text" id="email" value="info@forcebat.com">
+    </div>
+    <div class="form-group">
+      <label for="address">Dirección:</label>
+      <input type="text" id="address" value="Ciudad del Este, Paraguay">
+    </div>
+  </div>
+
   <script>
     // Actualiza la vista previa del héroe al cambiar los textos
     document.getElementById('hero-title').addEventListener('input', function(e) {
@@ -357,6 +504,26 @@
         reader.readAsDataURL(file);
       });
     }
+
+    // Actualizar nombres y enlaces del menú
+    for (let i = 0; i < 6; i++) {
+      document.getElementById('menu-name' + i).addEventListener('input', function(e) {
+        document.getElementById('navItem' + i).innerText = e.target.value;
+      });
+      document.getElementById('menu-link' + i).addEventListener('input', function(e) {
+        document.getElementById('navItem' + i).setAttribute('href', e.target.value);
+      });
+    }
+    // Actualizar información de contacto
+    document.getElementById('phone').addEventListener('input', function(e) {
+      document.getElementById('previewPhone').innerText = e.target.value;
+    });
+    document.getElementById('email').addEventListener('input', function(e) {
+      document.getElementById('previewEmail').innerText = e.target.value;
+    });
+    document.getElementById('address').addEventListener('input', function(e) {
+      document.getElementById('previewAddress').innerText = e.target.value;
+    });
   </script>
 </body>
 </html>
