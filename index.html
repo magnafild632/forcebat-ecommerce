@@ -407,13 +407,16 @@
   <section id="inicio" class="hero">
     <div class="hero-content">
       <div class="hero-image">
-        <img src="battery.png" alt="Batería Forcebat">
+        <!-- Añadimos id para poder modificar la imagen desde el panel -->
+        <img src="battery.png" alt="Batería Forcebat" id="hero-image-display">
       </div>
       <div class="hero-text">
-        <h1>Energía confiable para tu auto</h1>
-        <p>Compra hoy y recibe en el mismo día</p>
+        <!-- Añadimos ids para poder modificar título y subtítulo -->
+        <h1 id="hero-title-display">Energía confiable para tu auto</h1>
+        <p id="hero-subtitle-display">Compra hoy y recibe en el mismo día</p>
         <a href="#productos" class="btn">Comprar Ahora</a>
-        <div class="discount">Usa el código: FORCE10 y obtén 10% de descuento</div>
+        <!-- Añadimos id para poder modificar el código de descuento -->
+        <div class="discount" id="hero-discount-display">Usa el código: FORCE10 y obtén 10% de descuento</div>
       </div>
     </div>
   </section>
@@ -423,39 +426,39 @@
     <h2>Nuestras Baterías Más Vendidas</h2>
     <div class="product-grid">
       <div class="product-card">
-        <img src="battery.png" alt="Batería Forcebat estándar">
-        <h3>Batería Forcebat Estándar 60Ah</h3>
-        <div class="price">Gs 600.000</div>
+        <img src="battery.png" alt="Batería Forcebat estándar" id="product-image-0">
+        <h3 id="product-name-0">Batería Forcebat Estándar 60Ah</h3>
+        <div class="price" id="product-price-0">Gs 600.000</div>
         <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
-        <img src="battery.png" alt="Batería Forcebat premium">
-        <h3>Batería Forcebat Premium 75Ah</h3>
-        <div class="price">Gs 750.000</div>
+        <img src="battery.png" alt="Batería Forcebat premium" id="product-image-1">
+        <h3 id="product-name-1">Batería Forcebat Premium 75Ah</h3>
+        <div class="price" id="product-price-1">Gs 750.000</div>
         <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
-        <img src="battery.png" alt="Batería Forcebat ultra">
-        <h3>Batería Forcebat Ultra 90Ah</h3>
-        <div class="price">Gs 950.000</div>
+        <img src="battery.png" alt="Batería Forcebat ultra" id="product-image-2">
+        <h3 id="product-name-2">Batería Forcebat Ultra 90Ah</h3>
+        <div class="price" id="product-price-2">Gs 950.000</div>
         <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
-        <img src="battery.png" alt="Batería Forcebat compact">
-        <h3>Batería Forcebat Compact 45Ah</h3>
-        <div class="price">Gs 450.000</div>
+        <img src="battery.png" alt="Batería Forcebat compact" id="product-image-3">
+        <h3 id="product-name-3">Batería Forcebat Compact 45Ah</h3>
+        <div class="price" id="product-price-3">Gs 450.000</div>
         <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
-        <img src="battery.png" alt="Batería Forcebat pro">
-        <h3>Batería Forcebat Pro 100Ah</h3>
-        <div class="price">Gs 1.100.000</div>
+        <img src="battery.png" alt="Batería Forcebat pro" id="product-image-4">
+        <h3 id="product-name-4">Batería Forcebat Pro 100Ah</h3>
+        <div class="price" id="product-price-4">Gs 1.100.000</div>
         <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
-        <img src="battery.png" alt="Batería Forcebat eco">
-        <h3>Batería Forcebat Eco 50Ah</h3>
-        <div class="price">Gs 500.000</div>
+        <img src="battery.png" alt="Batería Forcebat eco" id="product-image-5">
+        <h3 id="product-name-5">Batería Forcebat Eco 50Ah</h3>
+        <div class="price" id="product-price-5">Gs 500.000</div>
         <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
     </div>
@@ -561,11 +564,85 @@
         <li><a href="#">Español | Portugués</a></li>
       </ul>
     </div>
+
+    <!-- Columna de información de contacto -->
+    <div class="footer-column">
+      <h3>Contacto</h3>
+      <ul>
+        <li>Teléfono: <span id="contactPhoneDisplay">+595 0971 325695</span></li>
+        <li>Email: <span id="contactEmailDisplay">info@forcebat.com</span></li>
+        <li>Dirección: <span id="contactAddressDisplay">Ciudad del Este, Paraguay</span></li>
+      </ul>
+    </div>
   </footer>
 
 </footer>
 
   <!-- Admin script removed: the editing interface lives in admin.html -->
+
+  <!-- Script para aplicar los cambios guardados desde el panel de administración -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Actualizar sección principal (hero)
+      var heroTitle = localStorage.getItem('heroTitle');
+      var heroSubtitle = localStorage.getItem('heroSubtitle');
+      var heroDiscount = localStorage.getItem('heroDiscount');
+      var heroImage = localStorage.getItem('heroImage');
+      if (heroTitle) {
+        var heroTitleElem = document.getElementById('hero-title-display');
+        if (heroTitleElem) heroTitleElem.innerText = heroTitle;
+      }
+      if (heroSubtitle) {
+        var heroSubtitleElem = document.getElementById('hero-subtitle-display');
+        if (heroSubtitleElem) heroSubtitleElem.innerText = heroSubtitle;
+      }
+      if (heroDiscount) {
+        var heroDiscountElem = document.getElementById('hero-discount-display');
+        if (heroDiscountElem) heroDiscountElem.innerText = 'Usa el código: ' + heroDiscount + ' y obtén 10% de descuento';
+      }
+      if (heroImage) {
+        var heroImageElem = document.getElementById('hero-image-display');
+        if (heroImageElem) heroImageElem.src = heroImage;
+      }
+
+      // Actualizar elementos del menú
+      for (var i = 0; i < 6; i++) {
+        var nameKey = 'menuName' + i;
+        var linkKey = 'menuLink' + i;
+        var storedName = localStorage.getItem(nameKey);
+        var storedLink = localStorage.getItem(linkKey);
+        var navItem = document.getElementById('navItem' + i);
+        if (navItem) {
+          if (storedName) navItem.innerText = storedName;
+          if (storedLink) navItem.setAttribute('href', storedLink);
+        }
+      }
+
+      // Actualizar productos
+      for (var j = 0; j < 6; j++) {
+        var pName = localStorage.getItem('productName' + j);
+        var pPrice = localStorage.getItem('productPrice' + j);
+        var pImg = localStorage.getItem('productImage' + j);
+        var nameElem = document.getElementById('product-name-' + j);
+        var priceElem = document.getElementById('product-price-' + j);
+        var imgElem = document.getElementById('product-image-' + j);
+        if (pName && nameElem) nameElem.innerText = pName;
+        if (pPrice && priceElem) priceElem.innerText = 'Gs ' + pPrice;
+        if (pImg && imgElem) imgElem.src = pImg;
+      }
+
+      // Actualizar información de contacto
+      var phone = localStorage.getItem('contactPhone');
+      var email = localStorage.getItem('contactEmail');
+      var address = localStorage.getItem('contactAddress');
+      var phoneElem = document.getElementById('contactPhoneDisplay');
+      var emailElem = document.getElementById('contactEmailDisplay');
+      var addressElem = document.getElementById('contactAddressDisplay');
+      if (phone && phoneElem) phoneElem.innerText = phone;
+      if (email && emailElem) emailElem.innerText = email;
+      if (address && addressElem) addressElem.innerText = address;
+    });
+  </script>
 
 </body>
 </html>
