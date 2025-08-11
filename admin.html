@@ -14,117 +14,151 @@
     }
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #f4f4f4;
+      /* Fondo más claro para un look moderno */
+      background: #f2f2f5;
       color: #333;
-      padding: 30px;
+      padding: 20px;
     }
+    /* Header moderno */
     header {
+      background: #000;
+      color: #fff;
+      padding: 15px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      justify-content: space-between;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      /* sombra suave para destacar el encabezado */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
     header img {
-      height: 50px;
+      height: 40px;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 20px;
     }
     header a {
-      text-decoration: none;
       color: #ffc600;
-      font-weight: 700;
+      text-decoration: none;
+      font-weight: 600;
       font-size: 14px;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 28px;
-    }
-    section {
-      margin-bottom: 40px;
-    }
-    section h2 {
-      margin-bottom: 15px;
-      font-size: 22px;
-      font-weight: 700;
-      text-align: center;
-      color: #222;
-    }
-    /* Hero preview styles */
-    #hero-preview {
+    /* Card contenedor */
+    .card {
       background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 40px;
+      overflow: hidden;
     }
-    #hero-preview h2 {
+    .card h2 {
       font-size: 26px;
-      margin-bottom: 5px;
+      margin-bottom: 25px;
+      color: #222;
+      border-left: 6px solid #ffc600;
+      padding-left: 12px;
     }
-    #hero-preview p {
+    /* Vista previa de la sección principal */
+    .hero-preview {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .hero-preview img {
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    .hero-preview h3 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .hero-preview p {
       font-size: 16px;
-      margin-bottom: 3px;
+      margin-bottom: 6px;
       color: #555;
     }
-    /* Form input styling */
+    /* Campos de formulario */
     .form-group {
-      margin-bottom: 10px;
+      margin-bottom: 18px;
     }
     .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
+      color: #444;
     }
     .form-group input[type="text"],
     .form-group input[type="number"] {
       width: 100%;
-      padding: 8px;
+      padding: 10px;
       border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
+      border-radius: 6px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: border-color 0.2s ease-in-out;
+    }
+    .form-group input[type="text"]:focus,
+    .form-group input[type="number"]:focus {
+      outline: none;
+      border-color: #ffc600;
+      box-shadow: 0 0 0 2px rgba(255,198,0,0.2);
     }
     .form-group input[type="file"] {
       width: 100%;
-      padding: 5px;
+      padding: 6px;
       font-size: 14px;
     }
+    /* Estilos para el grid de productos */
     .product-edit {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 25px;
       justify-content: center;
     }
     .product-card {
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      width: 280px;
-      padding: 15px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 20px;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
     .product-card img {
       width: 100%;
-      height: 150px;
+      height: 160px;
       object-fit: cover;
+      border-radius: 6px;
       border: 1px solid #ddd;
-      border-radius: 4px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .product-card h3 {
-      font-size: 18px;
-      margin-bottom: 5px;
+      font-size: 20px;
+      margin-bottom: 6px;
       color: #222;
+      text-align: center;
     }
     .product-card .price-preview {
-      font-size: 16px;
+      font-size: 18px;
       color: #e67e22;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .product-card .form-group {
-      margin-bottom: 8px;
+      width: 100%;
     }
-    /* Responsive adjustments */
     @media (max-width: 600px) {
       .product-card {
         width: 100%;
@@ -135,18 +169,16 @@
 <body>
   <header>
     <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
-    <a href="index.html">← Volver al sitio</a>
+    <h1>Panel de Administración</h1>
+    <a href="index.html">Volver al sitio</a>
   </header>
 
-  <h1>Panel de Administración del Sitio</h1>
-
-  <!-- Sección para editar la sección principal (hero) -->
-  <section id="hero-edit">
+  <!-- Card para editar el hero -->
+  <div class="card" id="hero-edit">
     <h2>Editar Sección Principal</h2>
-    <div id="hero-preview">
-      <!-- Vista previa de la imagen principal -->
-      <img id="previewHeroImage" src="battery.png" alt="Vista previa de la imagen principal" style="max-width:300px;width:100%;height:auto;margin:0 auto 15px;border:1px solid #ddd;border-radius:4px;">
-      <h2 id="previewHeroTitle">Energía confiable para tu auto</h2>
+    <div class="hero-preview">
+      <img id="previewHeroImage" src="battery.png" alt="Vista previa de la imagen principal">
+      <h3 id="previewHeroTitle">Energía confiable para tu auto</h3>
       <p id="previewHeroSubtitle">Compra hoy y recibe en el mismo día</p>
       <p id="previewDiscount">Código de descuento: FORCE10</p>
     </div>
@@ -163,13 +195,13 @@
       <input type="text" id="discount-code" value="FORCE10">
     </div>
     <div class="form-group">
-      <label for="uploadHeroImage">Imagen principal (héroe):</label>
-      <input type="file" id="uploadHeroImage" accept="image/*">
+      <label for="uploadHeroImageInput">Imagen principal (héroe):</label>
+      <input type="file" id="uploadHeroImageInput" accept="image/*">
     </div>
-  </section>
+  </div>
 
-  <!-- Sección para editar productos -->
-  <section id="products-edit">
+  <!-- Card para editar productos -->
+  <div class="card" id="products-edit">
     <h2>Editar Productos</h2>
     <div class="product-edit">
       <!-- Producto 1 -->
@@ -281,10 +313,10 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <script>
-    // Actualiza la vista previa del hero al cambiar los textos
+    // Actualiza la vista previa del héroe al cambiar los textos
     document.getElementById('hero-title').addEventListener('input', function(e) {
       document.getElementById('previewHeroTitle').innerText = e.target.value;
     });
@@ -294,21 +326,16 @@
     document.getElementById('discount-code').addEventListener('input', function(e) {
       document.getElementById('previewDiscount').innerText = 'Código de descuento: ' + e.target.value;
     });
-
-    // Manejar la carga de la imagen del hero
-    function handleImageUpload(event, imgId) {
-      var file = event.target.files[0];
+    // Manejar la carga de la imagen del héroe
+    document.getElementById('uploadHeroImageInput').addEventListener('change', function(e) {
+      var file = e.target.files[0];
       if (!file) return;
       var reader = new FileReader();
-      reader.onload = function(e) {
-        document.getElementById(imgId).src = e.target.result;
+      reader.onload = function(evt) {
+        document.getElementById('previewHeroImage').src = evt.target.result;
       };
       reader.readAsDataURL(file);
-    }
-    document.getElementById('uploadHeroImage').addEventListener('change', function(e) {
-      handleImageUpload(e, 'previewHeroImage');
     });
-
     // Manejar la carga y edición de cada producto
     for (let i = 0; i < 6; i++) {
       // Nombre
