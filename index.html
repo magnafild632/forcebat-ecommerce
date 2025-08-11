@@ -115,6 +115,18 @@
       background: #000;
       color: #ffc600;
     }
+
+    /* WhatsApp button styling */
+    .btn.whatsapp {
+      background: #25D366;
+      border-color: #25D366;
+      color: #fff;
+    }
+    .btn.whatsapp:hover {
+      background: #128C7E;
+      border-color: #128C7E;
+      color: #fff;
+    }
     .discount {
       margin-top: 15px;
       padding: 10px 15px;
@@ -363,6 +375,28 @@
 </head>
 <body>
 
+  <!-- Admin edit panel for changing images -->
+  <button id="admin-toggle" onclick="toggleAdminMenu()" style="position: fixed; top: 10px; left: 10px; z-index: 1000; background: #ffc600; color: #000; border: none; padding: 10px 15px; font-weight: 700; cursor: pointer; border-radius: 5px;">Editar sitio</button>
+  <div id="admin-menu" style="position: fixed; top: 60px; left: 10px; background: #fff; border: 1px solid #ccc; padding: 15px; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none;">
+    <h3 style="margin-bottom: 10px;">Cambiar Imágenes</h3>
+    <label style="display: block; margin-bottom: 8px;">Banner 1:
+      <input type="file" id="uploadSlide1" accept="image/*">
+    </label>
+    <label style="display: block; margin-bottom: 8px;">Banner 2:
+      <input type="file" id="uploadSlide2" accept="image/*">
+    </label>
+    <label style="display: block; margin-bottom: 8px;">Banner 3:
+      <input type="file" id="uploadSlide3" accept="image/*">
+    </label>
+    <label style="display: block; margin-bottom: 8px;">Imagen principal:
+      <input type="file" id="uploadHero" accept="image/*">
+    </label>
+    <label style="display: block; margin-bottom: 8px;">Imagen producto:
+      <input type="file" id="uploadProduct" accept="image/*">
+    </label>
+    <button onclick="toggleAdminMenu()" style="background: #ddd; border: none; padding: 8px 12px; cursor: pointer;">Cerrar</button>
+  </div>
+
   <!-- Header with logo and navigation -->
   <header>
     <img class="logo" src="logo.jpeg" alt="Forcebat Logo">
@@ -410,37 +444,37 @@
         <img src="battery.png" alt="Batería Forcebat estándar">
         <h3>Batería Forcebat Estándar 60Ah</h3>
         <div class="price">Gs 600.000</div>
-        <a href="#" class="btn">Agregar al Carrito</a>
+        <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
         <img src="battery.png" alt="Batería Forcebat premium">
         <h3>Batería Forcebat Premium 75Ah</h3>
         <div class="price">Gs 750.000</div>
-        <a href="#" class="btn">Agregar al Carrito</a>
+        <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
         <img src="battery.png" alt="Batería Forcebat ultra">
         <h3>Batería Forcebat Ultra 90Ah</h3>
         <div class="price">Gs 950.000</div>
-        <a href="#" class="btn">Agregar al Carrito</a>
+        <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
         <img src="battery.png" alt="Batería Forcebat compact">
         <h3>Batería Forcebat Compact 45Ah</h3>
         <div class="price">Gs 450.000</div>
-        <a href="#" class="btn">Agregar al Carrito</a>
+        <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
         <img src="battery.png" alt="Batería Forcebat pro">
         <h3>Batería Forcebat Pro 100Ah</h3>
         <div class="price">Gs 1.100.000</div>
-        <a href="#" class="btn">Agregar al Carrito</a>
+        <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
       <div class="product-card">
         <img src="battery.png" alt="Batería Forcebat eco">
         <h3>Batería Forcebat Eco 50Ah</h3>
         <div class="price">Gs 500.000</div>
-        <a href="#" class="btn">Agregar al Carrito</a>
+        <a href="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat" class="btn whatsapp" target="_blank" rel="noopener">Comprar por WhatsApp</a>
       </div>
     </div>
   </section>
@@ -546,6 +580,52 @@
       </ul>
     </div>
   </footer>
+
+</footer>
+
+  <!-- Admin menu script -->
+  <script>
+    // Toggle the admin menu visibility
+    function toggleAdminMenu() {
+      var menu = document.getElementById('admin-menu');
+      if (menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'block';
+      } else {
+        menu.style.display = 'none';
+      }
+    }
+
+    // Handle image uploads and update the corresponding elements
+    function handleImageUpload(event, selector) {
+      var file = event.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.querySelectorAll(selector).forEach(function(el) {
+          if (el.tagName.toLowerCase() === 'img') {
+            el.src = e.target.result;
+          } else {
+            el.style.backgroundImage = 'url(' + e.target.result + ')';
+          }
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Attach event listeners once the DOM has loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      var slide1Input = document.getElementById('uploadSlide1');
+      var slide2Input = document.getElementById('uploadSlide2');
+      var slide3Input = document.getElementById('uploadSlide3');
+      var heroInput = document.getElementById('uploadHero');
+      var productInput = document.getElementById('uploadProduct');
+      if (slide1Input) slide1Input.addEventListener('change', function(e) { handleImageUpload(e, '.slides img:nth-child(1)'); });
+      if (slide2Input) slide2Input.addEventListener('change', function(e) { handleImageUpload(e, '.slides img:nth-child(2)'); });
+      if (slide3Input) slide3Input.addEventListener('change', function(e) { handleImageUpload(e, '.slides img:nth-child(3)'); });
+      if (heroInput) heroInput.addEventListener('change', function(e) { handleImageUpload(e, '.hero-image img'); });
+      if (productInput) productInput.addEventListener('change', function(e) { handleImageUpload(e, '.product-card img'); });
+    });
+  </script>
 
 </body>
 </html>
