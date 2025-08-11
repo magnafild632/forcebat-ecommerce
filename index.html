@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forcebat - Más energía para tu auto</title>
+  <!-- Google Font for modern typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.5;
+      color: #000;
+    }
+
+    /* Header styling */
+    header {
+      background: #000;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img.logo {
+      height: 40px;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav ul li a:hover {
+      color: #ffc600;
+    }
+
+    /* Slider/rotating banner styles */
+    .slider {
+      width: 100%;
+      overflow: hidden;
+      height: 280px;
+      position: relative;
+    }
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      animation: slide 15s infinite;
+    }
+    .slides img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* Keyframes for sliding animation */
+    @keyframes slide {
+      0%, 20% { transform: translateX(0); }
+      33%, 45% { transform: translateX(-33.3333%); }
+      66%, 78% { transform: translateX(-66.6666%); }
+      90%, 100% { transform: translateX(0); }
+    }
+
+    /* Hero section styling */
+    .hero {
+      background: #fff;
+      padding: 50px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      max-width: 1200px;
+    }
+    .hero-image img {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+    }
+    .hero-text h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .hero-text p {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: #ffc600;
+      color: #000;
+      text-decoration: none;
+      font-weight: 700;
+      border: 2px solid #ffc600;
+      transition: background 0.3s, color 0.3s;
+    }
+    .btn:hover {
+      background: #000;
+      color: #ffc600;
+    }
+    .discount {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border: 2px solid #ffc600;
+      color: #000;
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    /* Products section */
+    .products {
+      background: #f4f4f4;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    .products h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .product-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      width: 280px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-card img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .product-card .price {
+      color: #ff9800;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    .product-card a {
+      margin-top: auto;
+      padding: 10px 20px;
+      background: #ffc600;
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid #ffc600;
+      transition: background 0.3s, color 0.3s;
+    }
+    .product-card a:hover {
+      background: #000;
+      color: #ffc600;
+    }
+
+    /* Services section */
+    .services {
+      background: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .services h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .service-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+    }
+    .service-item {
+      max-width: 260px;
+      text-align: left;
+    }
+    .service-number {
+      background: #ffc600;
+      color: #000;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 10px;
+    }
+    .service-text {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .service-subtext {
+      font-size: 14px;
+      color: #666;
+      margin-left: 40px;
+      margin-top: 5px;
+    }
+
+    /* How it works section */
+    .how-it-works {
+      background: #f4f4f4;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .how-it-works h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .steps {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .step {
+      max-width: 300px;
+    }
+    .step-number {
+      background: #ffc600;
+      color: #000;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .step-text {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* Opinions section */
+    .opinions {
+      background: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .opinions h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .testimonials {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .testimonial {
+      background: #fafafa;
+      border: 1px solid #e0e0e0;
+      padding: 20px;
+      width: 300px;
+    }
+    .testimonial p {
+      font-style: italic;
+      color: #333;
+    }
+    .testimonial .author {
+      margin-top: 15px;
+      font-weight: 600;
+      color: #000;
+    }
+    .stars {
+      color: #ffc600;
+      font-size: 18px;
+      margin-top: 5px;
+    }
+
+    /* Footer section */
+    footer {
+      background: #000;
+      color: #fff;
+      padding: 40px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+    footer .footer-column {
+      margin-right: 40px;
+      margin-bottom: 20px;
+    }
+    footer .footer-column h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    footer .footer-column ul {
+      list-style: none;
+    }
+    footer .footer-column ul li {
+      margin-bottom: 5px;
+    }
+    footer a {
+      color: #ffc600;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-text h1 {
+        font-size: 32px;
+      }
+      .slider {
+        height: 200px;
+      }
+      .product-grid {
+        flex-direction: column;
+      }
+      .service-list {
+        flex-direction: column;
+      }
+      .steps {
+        flex-direction: column;
+      }
+      .testimonials {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with logo and navigation -->
+  <header>
+    <img class="logo" src="logo.jpeg" alt="Forcebat Logo">
+    <nav>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Rotating banner slider -->
+  <section class="slider">
+    <div class="slides">
+      <img src="slide1.png" alt="Banner 1">
+      <img src="slide2.png" alt="Banner 2">
+      <img src="slide3.png" alt="Banner 3">
+    </div>
+  </section>
+
+  <!-- Hero section with battery image and call-to-action -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <div class="hero-image">
+        <img src="battery.png" alt="Batería Forcebat">
+      </div>
+      <div class="hero-text">
+        <h1>Energía confiable para tu auto</h1>
+        <p>Compra hoy y recibe en el mismo día</p>
+        <a href="#productos" class="btn">Comprar Ahora</a>
+        <div class="discount">Usa el código: FORCE10 y obtén 10% de descuento</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products section -->
+  <section id="productos" class="products">
+    <h2>Nuestras Baterías Más Vendidas</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="battery.png" alt="Batería Forcebat estándar">
+        <h3>Batería Forcebat Estándar 60Ah</h3>
+        <div class="price">Gs 600.000</div>
+        <a href="#" class="btn">Agregar al Carrito</a>
+      </div>
+      <div class="product-card">
+        <img src="battery.png" alt="Batería Forcebat premium">
+        <h3>Batería Forcebat Premium 75Ah</h3>
+        <div class="price">Gs 750.000</div>
+        <a href="#" class="btn">Agregar al Carrito</a>
+      </div>
+      <div class="product-card">
+        <img src="battery.png" alt="Batería Forcebat ultra">
+        <h3>Batería Forcebat Ultra 90Ah</h3>
+        <div class="price">Gs 950.000</div>
+        <a href="#" class="btn">Agregar al Carrito</a>
+      </div>
+      <div class="product-card">
+        <img src="battery.png" alt="Batería Forcebat compact">
+        <h3>Batería Forcebat Compact 45Ah</h3>
+        <div class="price">Gs 450.000</div>
+        <a href="#" class="btn">Agregar al Carrito</a>
+      </div>
+      <div class="product-card">
+        <img src="battery.png" alt="Batería Forcebat pro">
+        <h3>Batería Forcebat Pro 100Ah</h3>
+        <div class="price">Gs 1.100.000</div>
+        <a href="#" class="btn">Agregar al Carrito</a>
+      </div>
+      <div class="product-card">
+        <img src="battery.png" alt="Batería Forcebat eco">
+        <h3>Batería Forcebat Eco 50Ah</h3>
+        <div class="price">Gs 500.000</div>
+        <a href="#" class="btn">Agregar al Carrito</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services section -->
+  <section id="servicios" class="services">
+    <h2>Nuestros Servicios</h2>
+    <div class="service-list">
+      <div class="service-item">
+        <div class="service-number">1</div>
+        <span class="service-text">Instalación a domicilio</span>
+        <div class="service-subtext">Nuestro técnico instala la batería donde estés</div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">2</div>
+        <span class="service-text">Prueba de batería gratis</span>
+        <div class="service-subtext">Revisamos el estado de tu batería sin costo</div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">3</div>
+        <span class="service-text">Entrega rápida</span>
+        <div class="service-subtext">Recibe tu batería el mismo día de compra</div>
+      </div>
+      <div class="service-item">
+        <div class="service-number">4</div>
+        <span class="service-text">Garantía oficial</span>
+        <div class="service-subtext">Garantía original de fábrica incluida</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works section -->
+  <section id="como-funciona" class="how-it-works">
+    <h2>Cómo funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-text">Elige tu batería</div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-text">Programa la instalación</div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-text">Instalación rápida y segura</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Opinions / testimonials section -->
+  <section id="opiniones" class="opinions">
+    <h2>Opiniones de clientes</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>“Excelente servicio y batería de calidad. Instalación rápida y atención muy amable.”</p>
+        <div class="author">Juan Pérez</div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="testimonial">
+        <p>“Las baterías Forcebat son las mejores que he probado. ¡Recomendadas al 100%!”</p>
+        <div class="author">Ana Gómez</div>
+        <div class="stars">★★★★★</div>
+      </div>
+      <div class="testimonial">
+        <p>“Muy buena atención y entrega inmediata. La batería funciona perfecto.”</p>
+        <div class="author">Carlos Rodríguez</div>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer with additional links -->
+  <footer id="contacto">
+    <div class="footer-column">
+      <h3>Sobre nosotros</h3>
+      <ul>
+        <li><a href="#">Quiénes somos</a></li>
+        <li><a href="#">Nuestra historia</a></li>
+        <li><a href="#">Tienda física</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>Política de Garantía</h3>
+      <ul>
+        <li><a href="#">Garantía Forcebat</a></li>
+        <li><a href="#">Devoluciones</a></li>
+        <li><a href="#">Soporte técnico</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>Términos y Condiciones</h3>
+      <ul>
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Condiciones de uso</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h3>Idioma</h3>
+      <ul>
+        <li><a href="#">Español | Portugués</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</body>
+</html>
