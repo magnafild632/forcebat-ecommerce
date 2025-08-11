@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Gestión - Forcebat</title>
+  <!-- Estilos básicos para el panel de administración -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      padding: 40px 20px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    header img {
+      height: 50px;
+    }
+    header a {
+      text-decoration: none;
+      color: #ffc600;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .admin-form {
+      background: #fff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .admin-form label {
+      display: block;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .admin-form input[type="file"] {
+      margin-top: 5px;
+    }
+    .preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    .preview-item {
+      text-align: center;
+    }
+    .preview-item img {
+      width: 200px;
+      height: 120px;
+      object-fit: cover;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .preview-item span {
+      display: block;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
+    <a href="index.html">← Volver al sitio</a>
+  </header>
+
+  <h1>Panel de Gestión del Sitio</h1>
+  <p>Utiliza este panel para previsualizar y ajustar las imágenes del sitio. Los cambios aquí son de demostración y no se guardan automáticamente.</p>
+
+  <div class="admin-form">
+    <label>Banner 1:
+      <input type="file" id="uploadSlide1" accept="image/*">
+    </label>
+    <label>Banner 2:
+      <input type="file" id="uploadSlide2" accept="image/*">
+    </label>
+    <label>Banner 3:
+      <input type="file" id="uploadSlide3" accept="image/*">
+    </label>
+    <label>Imagen principal (héroe):
+      <input type="file" id="uploadHero" accept="image/*">
+    </label>
+    <label>Imagen de producto:
+      <input type="file" id="uploadProduct" accept="image/*">
+    </label>
+  </div>
+
+  <div class="preview">
+    <div class="preview-item">
+      <img src="slide1.png" id="previewSlide1" alt="Vista previa Banner 1">
+      <span>Banner 1</span>
+    </div>
+    <div class="preview-item">
+      <img src="slide2.png" id="previewSlide2" alt="Vista previa Banner 2">
+      <span>Banner 2</span>
+    </div>
+    <div class="preview-item">
+      <img src="slide3.png" id="previewSlide3" alt="Vista previa Banner 3">
+      <span>Banner 3</span>
+    </div>
+    <div class="preview-item">
+      <img src="battery.png" id="previewHero" alt="Vista previa Imagen principal">
+      <span>Imagen principal</span>
+    </div>
+    <div class="preview-item">
+      <img src="battery.png" id="previewProduct" alt="Vista previa Imagen producto">
+      <span>Imagen producto</span>
+    </div>
+  </div>
+
+  <script>
+    // Función para manejar la carga de imágenes y mostrar una vista previa
+    function handleImageUpload(event, previewId) {
+      var file = event.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var previewImg = document.getElementById(previewId);
+        previewImg.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Asociar entradas de archivo con sus vistas previas
+    document.getElementById('uploadSlide1').addEventListener('change', function(e) { handleImageUpload(e, 'previewSlide1'); });
+    document.getElementById('uploadSlide2').addEventListener('change', function(e) { handleImageUpload(e, 'previewSlide2'); });
+    document.getElementById('uploadSlide3').addEventListener('change', function(e) { handleImageUpload(e, 'previewSlide3'); });
+    document.getElementById('uploadHero').addEventListener('change', function(e) { handleImageUpload(e, 'previewHero'); });
+    document.getElementById('uploadProduct').addEventListener('change', function(e) { handleImageUpload(e, 'previewProduct'); });
+  </script>
+</body>
+</html>

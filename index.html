@@ -375,27 +375,8 @@
 </head>
 <body>
 
-  <!-- Admin edit panel for changing images -->
-  <button id="admin-toggle" onclick="toggleAdminMenu()" style="position: fixed; top: 10px; left: 10px; z-index: 1000; background: #ffc600; color: #000; border: none; padding: 10px 15px; font-weight: 700; cursor: pointer; border-radius: 5px;">Editar sitio</button>
-  <div id="admin-menu" style="position: fixed; top: 60px; left: 10px; background: #fff; border: 1px solid #ccc; padding: 15px; z-index: 1000; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none;">
-    <h3 style="margin-bottom: 10px;">Cambiar Imágenes</h3>
-    <label style="display: block; margin-bottom: 8px;">Banner 1:
-      <input type="file" id="uploadSlide1" accept="image/*">
-    </label>
-    <label style="display: block; margin-bottom: 8px;">Banner 2:
-      <input type="file" id="uploadSlide2" accept="image/*">
-    </label>
-    <label style="display: block; margin-bottom: 8px;">Banner 3:
-      <input type="file" id="uploadSlide3" accept="image/*">
-    </label>
-    <label style="display: block; margin-bottom: 8px;">Imagen principal:
-      <input type="file" id="uploadHero" accept="image/*">
-    </label>
-    <label style="display: block; margin-bottom: 8px;">Imagen producto:
-      <input type="file" id="uploadProduct" accept="image/*">
-    </label>
-    <button onclick="toggleAdminMenu()" style="background: #ddd; border: none; padding: 8px 12px; cursor: pointer;">Cerrar</button>
-  </div>
+  <!-- Admin link to separate management page -->
+  <!-- El panel de edición se trasladó a una página aparte (admin.html) -->
 
   <!-- Header with logo and navigation -->
   <header>
@@ -408,6 +389,7 @@
         <li><a href="#como-funciona">Cómo funciona</a></li>
         <li><a href="#opiniones">Opiniones</a></li>
         <li><a href="#contacto">Contacto</a></li>
+        <li><a href="admin.html">Admin</a></li>
       </ul>
     </nav>
   </header>
@@ -583,49 +565,7 @@
 
 </footer>
 
-  <!-- Admin menu script -->
-  <script>
-    // Toggle the admin menu visibility
-    function toggleAdminMenu() {
-      var menu = document.getElementById('admin-menu');
-      if (menu.style.display === 'none' || menu.style.display === '') {
-        menu.style.display = 'block';
-      } else {
-        menu.style.display = 'none';
-      }
-    }
-
-    // Handle image uploads and update the corresponding elements
-    function handleImageUpload(event, selector) {
-      var file = event.target.files[0];
-      if (!file) return;
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        document.querySelectorAll(selector).forEach(function(el) {
-          if (el.tagName.toLowerCase() === 'img') {
-            el.src = e.target.result;
-          } else {
-            el.style.backgroundImage = 'url(' + e.target.result + ')';
-          }
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-
-    // Attach event listeners once the DOM has loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      var slide1Input = document.getElementById('uploadSlide1');
-      var slide2Input = document.getElementById('uploadSlide2');
-      var slide3Input = document.getElementById('uploadSlide3');
-      var heroInput = document.getElementById('uploadHero');
-      var productInput = document.getElementById('uploadProduct');
-      if (slide1Input) slide1Input.addEventListener('change', function(e) { handleImageUpload(e, '.slides img:nth-child(1)'); });
-      if (slide2Input) slide2Input.addEventListener('change', function(e) { handleImageUpload(e, '.slides img:nth-child(2)'); });
-      if (slide3Input) slide3Input.addEventListener('change', function(e) { handleImageUpload(e, '.slides img:nth-child(3)'); });
-      if (heroInput) heroInput.addEventListener('change', function(e) { handleImageUpload(e, '.hero-image img'); });
-      if (productInput) productInput.addEventListener('change', function(e) { handleImageUpload(e, '.product-card img'); });
-    });
-  </script>
+  <!-- Admin script removed: the editing interface lives in admin.html -->
 
 </body>
 </html>
