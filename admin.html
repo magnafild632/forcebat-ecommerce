@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Gestión - Forcebat</title>
-  <!-- Estilos básicos para el panel de administración -->
+  <title>Panel de Administración - Forcebat</title>
+  <!-- Fuente Montserrat -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -16,13 +16,13 @@
       font-family: 'Montserrat', sans-serif;
       background: #f4f4f4;
       color: #333;
-      padding: 40px 20px;
+      padding: 30px;
     }
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     header img {
       height: 50px;
@@ -31,121 +31,305 @@
       text-decoration: none;
       color: #ffc600;
       font-weight: 700;
+      font-size: 14px;
     }
     h1 {
-      font-size: 32px;
+      text-align: center;
       margin-bottom: 20px;
+      font-size: 28px;
     }
-    .admin-form {
-      background: #fff;
-      padding: 20px;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      max-width: 600px;
-      margin: 0 auto;
+    section {
+      margin-bottom: 40px;
     }
-    .admin-form label {
-      display: block;
+    section h2 {
       margin-bottom: 15px;
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      color: #222;
+    }
+    /* Hero preview styles */
+    #hero-preview {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    #hero-preview h2 {
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+    #hero-preview p {
+      font-size: 16px;
+      margin-bottom: 3px;
+      color: #555;
+    }
+    /* Form input styling */
+    .form-group {
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      display: block;
       font-weight: 600;
+      margin-bottom: 5px;
     }
-    .admin-form input[type="file"] {
-      margin-top: 5px;
+    .form-group input[type="text"],
+    .form-group input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
     }
-    .preview {
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 5px;
+      font-size: 14px;
+    }
+    .product-edit {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      margin-top: 20px;
       justify-content: center;
     }
-    .preview-item {
-      text-align: center;
+    .product-card {
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 280px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    .preview-item img {
-      width: 200px;
-      height: 120px;
+    .product-card img {
+      width: 100%;
+      height: 150px;
       object-fit: cover;
       border: 1px solid #ddd;
-      border-radius: 5px;
+      border-radius: 4px;
+      margin-bottom: 10px;
     }
-    .preview-item span {
-      display: block;
-      margin-top: 5px;
-      font-size: 14px;
+    .product-card h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+      color: #222;
+    }
+    .product-card .price-preview {
+      font-size: 16px;
+      color: #e67e22;
+      margin-bottom: 10px;
+    }
+    .product-card .form-group {
+      margin-bottom: 8px;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .product-card {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
     <a href="index.html">← Volver al sitio</a>
   </header>
 
-  <h1>Panel de Gestión del Sitio</h1>
-  <p>Utiliza este panel para previsualizar y ajustar las imágenes del sitio. Los cambios aquí son de demostración y no se guardan automáticamente.</p>
+  <h1>Panel de Administración del Sitio</h1>
 
-  <div class="admin-form">
-    <label>Banner 1:
-      <input type="file" id="uploadSlide1" accept="image/*">
-    </label>
-    <label>Banner 2:
-      <input type="file" id="uploadSlide2" accept="image/*">
-    </label>
-    <label>Banner 3:
-      <input type="file" id="uploadSlide3" accept="image/*">
-    </label>
-    <label>Imagen principal (héroe):
-      <input type="file" id="uploadHero" accept="image/*">
-    </label>
-    <label>Imagen de producto:
-      <input type="file" id="uploadProduct" accept="image/*">
-    </label>
-  </div>
+  <!-- Sección para editar la sección principal (hero) -->
+  <section id="hero-edit">
+    <h2>Editar Sección Principal</h2>
+    <div id="hero-preview">
+      <!-- Vista previa de la imagen principal -->
+      <img id="previewHeroImage" src="battery.png" alt="Vista previa de la imagen principal" style="max-width:300px;width:100%;height:auto;margin:0 auto 15px;border:1px solid #ddd;border-radius:4px;">
+      <h2 id="previewHeroTitle">Energía confiable para tu auto</h2>
+      <p id="previewHeroSubtitle">Compra hoy y recibe en el mismo día</p>
+      <p id="previewDiscount">Código de descuento: FORCE10</p>
+    </div>
+    <div class="form-group">
+      <label for="hero-title">Título principal:</label>
+      <input type="text" id="hero-title" value="Energía confiable para tu auto">
+    </div>
+    <div class="form-group">
+      <label for="hero-subtitle">Subtítulo:</label>
+      <input type="text" id="hero-subtitle" value="Compra hoy y recibe en el mismo día">
+    </div>
+    <div class="form-group">
+      <label for="discount-code">Código de descuento:</label>
+      <input type="text" id="discount-code" value="FORCE10">
+    </div>
+    <div class="form-group">
+      <label for="uploadHeroImage">Imagen principal (héroe):</label>
+      <input type="file" id="uploadHeroImage" accept="image/*">
+    </div>
+  </section>
 
-  <div class="preview">
-    <div class="preview-item">
-      <img src="slide1.png" id="previewSlide1" alt="Vista previa Banner 1">
-      <span>Banner 1</span>
+  <!-- Sección para editar productos -->
+  <section id="products-edit">
+    <h2>Editar Productos</h2>
+    <div class="product-edit">
+      <!-- Producto 1 -->
+      <div class="product-card" data-index="0">
+        <img src="battery.png" id="prodImg0" alt="Producto 1">
+        <h3 id="prodName0">Batería Forcebat Estándar 60Ah</h3>
+        <div class="price-preview">Gs <span id="prodPrice0">600.000</span></div>
+        <div class="form-group">
+          <label for="name0">Nombre:</label>
+          <input type="text" id="name0" value="Batería Forcebat Estándar 60Ah">
+        </div>
+        <div class="form-group">
+          <label for="price0">Precio (Gs):</label>
+          <input type="text" id="price0" value="600.000">
+        </div>
+        <div class="form-group">
+          <label for="uploadProd0">Cambiar imagen:</label>
+          <input type="file" id="uploadProd0" accept="image/*">
+        </div>
+      </div>
+      <!-- Producto 2 -->
+      <div class="product-card" data-index="1">
+        <img src="battery.png" id="prodImg1" alt="Producto 2">
+        <h3 id="prodName1">Batería Forcebat Premium 75Ah</h3>
+        <div class="price-preview">Gs <span id="prodPrice1">750.000</span></div>
+        <div class="form-group">
+          <label for="name1">Nombre:</label>
+          <input type="text" id="name1" value="Batería Forcebat Premium 75Ah">
+        </div>
+        <div class="form-group">
+          <label for="price1">Precio (Gs):</label>
+          <input type="text" id="price1" value="750.000">
+        </div>
+        <div class="form-group">
+          <label for="uploadProd1">Cambiar imagen:</label>
+          <input type="file" id="uploadProd1" accept="image/*">
+        </div>
+      </div>
+      <!-- Producto 3 -->
+      <div class="product-card" data-index="2">
+        <img src="battery.png" id="prodImg2" alt="Producto 3">
+        <h3 id="prodName2">Batería Forcebat Ultra 90Ah</h3>
+        <div class="price-preview">Gs <span id="prodPrice2">950.000</span></div>
+        <div class="form-group">
+          <label for="name2">Nombre:</label>
+          <input type="text" id="name2" value="Batería Forcebat Ultra 90Ah">
+        </div>
+        <div class="form-group">
+          <label for="price2">Precio (Gs):</label>
+          <input type="text" id="price2" value="950.000">
+        </div>
+        <div class="form-group">
+          <label for="uploadProd2">Cambiar imagen:</label>
+          <input type="file" id="uploadProd2" accept="image/*">
+        </div>
+      </div>
+      <!-- Producto 4 -->
+      <div class="product-card" data-index="3">
+        <img src="battery.png" id="prodImg3" alt="Producto 4">
+        <h3 id="prodName3">Batería Forcebat Compact 45Ah</h3>
+        <div class="price-preview">Gs <span id="prodPrice3">450.000</span></div>
+        <div class="form-group">
+          <label for="name3">Nombre:</label>
+          <input type="text" id="name3" value="Batería Forcebat Compact 45Ah">
+        </div>
+        <div class="form-group">
+          <label for="price3">Precio (Gs):</label>
+          <input type="text" id="price3" value="450.000">
+        </div>
+        <div class="form-group">
+          <label for="uploadProd3">Cambiar imagen:</label>
+          <input type="file" id="uploadProd3" accept="image/*">
+        </div>
+      </div>
+      <!-- Producto 5 -->
+      <div class="product-card" data-index="4">
+        <img src="battery.png" id="prodImg4" alt="Producto 5">
+        <h3 id="prodName4">Batería Forcebat Pro 100Ah</h3>
+        <div class="price-preview">Gs <span id="prodPrice4">1.100.000</span></div>
+        <div class="form-group">
+          <label for="name4">Nombre:</label>
+          <input type="text" id="name4" value="Batería Forcebat Pro 100Ah">
+        </div>
+        <div class="form-group">
+          <label for="price4">Precio (Gs):</label>
+          <input type="text" id="price4" value="1.100.000">
+        </div>
+        <div class="form-group">
+          <label for="uploadProd4">Cambiar imagen:</label>
+          <input type="file" id="uploadProd4" accept="image/*">
+        </div>
+      </div>
+      <!-- Producto 6 -->
+      <div class="product-card" data-index="5">
+        <img src="battery.png" id="prodImg5" alt="Producto 6">
+        <h3 id="prodName5">Batería Forcebat Eco 50Ah</h3>
+        <div class="price-preview">Gs <span id="prodPrice5">500.000</span></div>
+        <div class="form-group">
+          <label for="name5">Nombre:</label>
+          <input type="text" id="name5" value="Batería Forcebat Eco 50Ah">
+        </div>
+        <div class="form-group">
+          <label for="price5">Precio (Gs):</label>
+          <input type="text" id="price5" value="500.000">
+        </div>
+        <div class="form-group">
+          <label for="uploadProd5">Cambiar imagen:</label>
+          <input type="file" id="uploadProd5" accept="image/*">
+        </div>
+      </div>
     </div>
-    <div class="preview-item">
-      <img src="slide2.png" id="previewSlide2" alt="Vista previa Banner 2">
-      <span>Banner 2</span>
-    </div>
-    <div class="preview-item">
-      <img src="slide3.png" id="previewSlide3" alt="Vista previa Banner 3">
-      <span>Banner 3</span>
-    </div>
-    <div class="preview-item">
-      <img src="battery.png" id="previewHero" alt="Vista previa Imagen principal">
-      <span>Imagen principal</span>
-    </div>
-    <div class="preview-item">
-      <img src="battery.png" id="previewProduct" alt="Vista previa Imagen producto">
-      <span>Imagen producto</span>
-    </div>
-  </div>
+  </section>
 
   <script>
-    // Función para manejar la carga de imágenes y mostrar una vista previa
-    function handleImageUpload(event, previewId) {
+    // Actualiza la vista previa del hero al cambiar los textos
+    document.getElementById('hero-title').addEventListener('input', function(e) {
+      document.getElementById('previewHeroTitle').innerText = e.target.value;
+    });
+    document.getElementById('hero-subtitle').addEventListener('input', function(e) {
+      document.getElementById('previewHeroSubtitle').innerText = e.target.value;
+    });
+    document.getElementById('discount-code').addEventListener('input', function(e) {
+      document.getElementById('previewDiscount').innerText = 'Código de descuento: ' + e.target.value;
+    });
+
+    // Manejar la carga de la imagen del hero
+    function handleImageUpload(event, imgId) {
       var file = event.target.files[0];
       if (!file) return;
       var reader = new FileReader();
       reader.onload = function(e) {
-        var previewImg = document.getElementById(previewId);
-        previewImg.src = e.target.result;
+        document.getElementById(imgId).src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
+    document.getElementById('uploadHeroImage').addEventListener('change', function(e) {
+      handleImageUpload(e, 'previewHeroImage');
+    });
 
-    // Asociar entradas de archivo con sus vistas previas
-    document.getElementById('uploadSlide1').addEventListener('change', function(e) { handleImageUpload(e, 'previewSlide1'); });
-    document.getElementById('uploadSlide2').addEventListener('change', function(e) { handleImageUpload(e, 'previewSlide2'); });
-    document.getElementById('uploadSlide3').addEventListener('change', function(e) { handleImageUpload(e, 'previewSlide3'); });
-    document.getElementById('uploadHero').addEventListener('change', function(e) { handleImageUpload(e, 'previewHero'); });
-    document.getElementById('uploadProduct').addEventListener('change', function(e) { handleImageUpload(e, 'previewProduct'); });
+    // Manejar la carga y edición de cada producto
+    for (let i = 0; i < 6; i++) {
+      // Nombre
+      document.getElementById('name' + i).addEventListener('input', function(e) {
+        document.getElementById('prodName' + i).innerText = e.target.value;
+      });
+      // Precio
+      document.getElementById('price' + i).addEventListener('input', function(e) {
+        document.getElementById('prodPrice' + i).innerText = e.target.value;
+      });
+      // Imagen
+      document.getElementById('uploadProd' + i).addEventListener('change', function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('prodImg' + i).src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
   </script>
 </body>
 </html>
