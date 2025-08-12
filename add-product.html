@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Añadir Producto - Forcebat Admin</title>
+  <!-- Fuente Montserrat para una tipografía moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f2f5;
+      color: #333;
+      padding: 20px;
+    }
+    /* Encabezado negro con logo y enlaces */
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    header img {
+      height: 40px;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 20px;
+    }
+    header a {
+      color: #ffc600;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    /* Navegación superior */
+    .admin-nav {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+    }
+    .admin-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+    }
+    .admin-nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .admin-nav ul li a:hover {
+      background: #ffc600;
+      color: #000;
+    }
+    /* Contenedor principal */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+    .card h2 {
+      font-size: 26px;
+      margin-bottom: 25px;
+      color: #222;
+      border-left: 6px solid #ffc600;
+      padding-left: 12px;
+    }
+    /* Estilos de formularios */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #444;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: border-color 0.2s ease-in-out;
+    }
+    .form-group input[type="text"]:focus,
+    .form-group input[type="number"]:focus {
+      outline: none;
+      border-color: #ffc600;
+      box-shadow: 0 0 0 2px rgba(255,198,0,0.2);
+    }
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+    }
+    /* Botón añadir */
+    .btn-add {
+      background: #ffc600;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    .btn-add:hover {
+      background: #e6b500;
+    }
+    .btn-add:active {
+      transform: scale(0.98);
+    }
+    .message {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
+    <h1>Panel de Administración</h1>
+    <a href="index.html">Volver al sitio</a>
+  </header>
+  <!-- Navegación entre secciones -->
+  <nav class="admin-nav">
+    <ul>
+      <li><a href="hero-edit.html">Sección principal</a></li>
+      <li><a href="products-edit.html">Productos</a></li>
+      <li><a href="add-product.html">Añadir producto</a></li>
+      <li><a href="menu-edit.html">Menú</a></li>
+      <li><a href="contact-edit.html">Contacto</a></li>
+      <li><a href="stats.html">Estadísticas</a></li>
+      <li><a href="publish.html">Publicar</a></li>
+    </ul>
+  </nav>
+  <!-- Formulario para añadir un nuevo producto -->
+  <div class="card">
+    <h2>Añadir nuevo producto</h2>
+    <div class="form-group">
+      <label for="newProdName">Nombre del producto:</label>
+      <input type="text" id="newProdName" placeholder="Nombre" />
+    </div>
+    <div class="form-group">
+      <label for="newProdPrice">Precio (Gs):</label>
+      <input type="text" id="newProdPrice" placeholder="0" />
+    </div>
+    <div class="form-group">
+      <label for="newProdImage">Imagen del producto:</label>
+      <input type="file" id="newProdImage" accept="image/*" />
+    </div>
+    <div class="form-group">
+      <label for="newProdLink">Enlace de WhatsApp:</label>
+      <input type="text" id="newProdLink" placeholder="https://wa.me/..." />
+    </div>
+    <button class="btn-add" id="addProdBtn">Añadir producto</button>
+    <p class="message" id="addMessage"></p>
+  </div>
+  <script>
+    // Función para añadir un nuevo producto a localStorage
+    document.getElementById('addProdBtn').addEventListener('click', function() {
+      var nameField = document.getElementById('newProdName');
+      var priceField = document.getElementById('newProdPrice');
+      var imageField = document.getElementById('newProdImage');
+      var linkField = document.getElementById('newProdLink');
+      var messageEl = document.getElementById('addMessage');
+      var name = nameField.value.trim();
+      var price = priceField.value.trim();
+      var link = linkField.value.trim();
+      if (!name || !price) {
+        messageEl.style.color = '#c0392b';
+        messageEl.innerText = 'Por favor, introduzca nombre y precio.';
+        return;
+      }
+      // Obtener el índice del nuevo producto
+      var count = parseInt(localStorage.getItem('productCount'));
+      if (isNaN(count) || count < 0) {
+        // si productCount no existe, empezar con el número de productos iniciales por defecto
+        count = parseInt(localStorage.getItem('productCount'));
+      }
+      if (isNaN(count) || count < 0) {
+        count = 0;
+      }
+      // Preparar y guardar la imagen (si se proporciona)
+      var file = imageField.files[0];
+      if (file) {
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+          var dataUrl = evt.target.result;
+          saveNewProduct(count, name, price, link, dataUrl);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // sin imagen, usar el valor por defecto
+        saveNewProduct(count, name, price, link, 'battery.png');
+      }
+    });
+    function saveNewProduct(index, name, price, link, dataUrl) {
+      localStorage.setItem('productName' + index, name);
+      localStorage.setItem('productPrice' + index, price);
+      localStorage.setItem('productLink' + index, link || 'https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat');
+      localStorage.setItem('productImage' + index, dataUrl);
+      localStorage.setItem('productClicks' + index, 0);
+      // Actualizar el contador
+      localStorage.setItem('productCount', index + 1);
+      // Limpiar campos y mostrar mensaje
+      document.getElementById('newProdName').value = '';
+      document.getElementById('newProdPrice').value = '';
+      document.getElementById('newProdImage').value = '';
+      document.getElementById('newProdLink').value = '';
+      var messageEl = document.getElementById('addMessage');
+      messageEl.style.color = '#27ae60';
+      messageEl.innerText = 'Producto añadido correctamente.';
+    }
+  </script>
+</body>
+</html>

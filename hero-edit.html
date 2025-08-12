@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Sección Principal - Forcebat Admin</title>
+  <!-- Fuente Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f2f5;
+      color: #333;
+      padding: 20px;
+    }
+    /* Header moderno */
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    header img {
+      height: 40px;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 20px;
+    }
+    header a {
+      color: #ffc600;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    /* Navegación del panel de administración */
+    .admin-nav {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+    }
+    .admin-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+      margin: 0;
+    }
+    .admin-nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .admin-nav ul li a:hover {
+      background: #ffc600;
+      color: #000;
+    }
+    /* Card contenedor */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+    .card h2 {
+      font-size: 26px;
+      margin-bottom: 25px;
+      color: #222;
+      border-left: 6px solid #ffc600;
+      padding-left: 12px;
+    }
+    /* Vista previa de la sección principal */
+    .hero-preview {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .hero-preview img {
+      max-width: 350px;
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    .hero-preview h3 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .hero-preview p {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+    /* Campos de formulario */
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #444;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+      background: #fafafa;
+      transition: border-color 0.2s ease-in-out;
+    }
+    .form-group input[type="text"]:focus,
+    .form-group input[type="number"]:focus {
+      outline: none;
+      border-color: #ffc600;
+      box-shadow: 0 0 0 2px rgba(255,198,0,0.2);
+    }
+    .form-group input[type="file"] {
+      width: 100%;
+      padding: 6px;
+      font-size: 14px;
+    }
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
+    <h1>Panel de Administración</h1>
+    <a href="index.html">Volver al sitio</a>
+  </header>
+  <!-- Navegación superior para cada sección -->
+  <nav class="admin-nav">
+    <ul>
+      <li><a href="hero-edit.html">Sección principal</a></li>
+      <li><a href="products-edit.html">Productos</a></li>
+      <li><a href="add-product.html">Añadir producto</a></li>
+      <li><a href="menu-edit.html">Menú</a></li>
+      <li><a href="contact-edit.html">Contacto</a></li>
+      <li><a href="stats.html">Estadísticas</a></li>
+      <li><a href="publish.html">Publicar</a></li>
+    </ul>
+  </nav>
+  <!-- Formulario para editar sección principal -->
+  <div class="card" id="hero-edit-page">
+    <h2>Editar Sección Principal</h2>
+    <div class="hero-preview">
+      <img id="previewHeroImage" src="battery.png" alt="Vista previa de la imagen principal">
+      <h3 id="previewHeroTitle">Energía confiable para tu auto</h3>
+      <p id="previewHeroSubtitle">Compra hoy y recibe en el mismo día</p>
+      <p id="previewDiscount">Código de descuento: FORCE10</p>
+    </div>
+    <div class="form-group">
+      <label for="hero-title">Título principal:</label>
+      <input type="text" id="hero-title" value="">
+    </div>
+    <div class="form-group">
+      <label for="hero-subtitle">Subtítulo:</label>
+      <input type="text" id="hero-subtitle" value="">
+    </div>
+    <div class="form-group">
+      <label for="discount-code">Código de descuento:</label>
+      <input type="text" id="discount-code" value="">
+    </div>
+    <div class="form-group">
+      <label for="uploadHeroImageInput">Imagen principal (héroe):</label>
+      <input type="file" id="uploadHeroImageInput" accept="image/*">
+    </div>
+    <p class="note">Los cambios se guardan automáticamente.</p>
+  </div>
+  <script>
+    // Inicializar la vista previa y campos con valores almacenados
+    function initHero() {
+      var heroTitle = localStorage.getItem('heroTitle') || 'Energía confiable para tu auto';
+      var heroSubtitle = localStorage.getItem('heroSubtitle') || 'Compra hoy y recibe en el mismo día';
+      var heroDiscount = localStorage.getItem('heroDiscount') || 'FORCE10';
+      var heroImage = localStorage.getItem('heroImage') || 'battery.png';
+      document.getElementById('hero-title').value = heroTitle;
+      document.getElementById('hero-subtitle').value = heroSubtitle;
+      document.getElementById('discount-code').value = heroDiscount;
+      document.getElementById('previewHeroTitle').innerText = heroTitle;
+      document.getElementById('previewHeroSubtitle').innerText = heroSubtitle;
+      document.getElementById('previewDiscount').innerText = 'Código de descuento: ' + heroDiscount;
+      document.getElementById('previewHeroImage').src = heroImage;
+    }
+    initHero();
+    // Actualizar título principal
+    document.getElementById('hero-title').addEventListener('input', function(e) {
+      var val = e.target.value;
+      document.getElementById('previewHeroTitle').innerText = val;
+      localStorage.setItem('heroTitle', val);
+    });
+    // Actualizar subtítulo
+    document.getElementById('hero-subtitle').addEventListener('input', function(e) {
+      var val = e.target.value;
+      document.getElementById('previewHeroSubtitle').innerText = val;
+      localStorage.setItem('heroSubtitle', val);
+    });
+    // Actualizar código de descuento
+    document.getElementById('discount-code').addEventListener('input', function(e) {
+      var val = e.target.value;
+      document.getElementById('previewDiscount').innerText = 'Código de descuento: ' + val;
+      localStorage.setItem('heroDiscount', val);
+    });
+    // Cambiar imagen del héroe
+    document.getElementById('uploadHeroImageInput').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        var dataUrl = evt.target.result;
+        document.getElementById('previewHeroImage').src = dataUrl;
+        localStorage.setItem('heroImage', dataUrl);
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>
