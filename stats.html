@@ -34,6 +34,12 @@
   </style>
 </head>
 <body>
+  <!-- Redirección a la página de login si no está logueado -->
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  </script>
   <header>
     <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
     <h1>Panel de Administración</h1>
@@ -48,6 +54,7 @@
       <li><a href="contact-edit.html">Contacto</a></li>
       <li><a href="stats.html">Estadísticas</a></li>
       <li><a href="publish.html">Publicar</a></li>
+      <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
     </ul>
   </nav>
   <div class="card">
@@ -295,6 +302,18 @@
           }
         });
       })();
+    });
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var logoutLink = document.getElementById('logoutLink');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isLoggedIn');
+          window.location.href = 'login.html';
+        });
+      }
     });
   </script>
 </body>
