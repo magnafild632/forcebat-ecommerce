@@ -68,6 +68,19 @@
       margin-top: 10px;
       text-align: center;
     }
+    /* Enlace para recuperación de contraseña */
+    .password-recovery {
+      margin-top: 15px;
+      text-align: center;
+    }
+    .password-recovery a {
+      color: #3498db;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .password-recovery a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -84,6 +97,7 @@
       </div>
       <button type="submit" class="btn-login">Entrar</button>
       <div id="errorMsg" class="error-message">Usuario o contraseña incorrectos.</div>
+      <p class="password-recovery"><a href="password-recovery.html">¿Olvidaste tu contraseña?</a></p>
     </form>
   </div>
   <script>

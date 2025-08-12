@@ -31,6 +31,27 @@
     .menu-form .menu-item-edit input[type="text"]:focus { outline: none; border-color: #ffc600; box-shadow: 0 0 0 2px rgba(255,198,0,0.2); }
     .menu-form label { font-weight: 600; font-size: 14px; margin-right: 6px; }
     .note { font-size: 14px; color: #666; margin-top: 10px; }
+    /* Estilos para botón de publicar y mensaje */
+    .btn-publish {
+      background: #ffc600;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+      margin-top: 10px;
+    }
+    .btn-publish:hover { background: #e6b500; }
+    .btn-publish:active { transform: scale(0.98); }
+    .publish-message {
+      font-size: 14px;
+      color: #27ae60;
+      margin-top: 10px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -152,6 +173,24 @@
           e.preventDefault();
           localStorage.removeItem('isLoggedIn');
           window.location.href = 'login.html';
+        });
+      }
+    });
+  </script>
+  <!-- Sección para publicar cambios -->
+  <div class="card">
+    <h2>Publicar cambios</h2>
+    <p>Haz clic para guardar todas tus modificaciones.</p>
+    <button class="btn-publish" id="publishBtn">Publicar cambios</button>
+    <p class="publish-message" id="publishMsg">¡Cambios publicados correctamente!</p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var pubBtn = document.getElementById('publishBtn');
+      if (pubBtn) {
+        pubBtn.addEventListener('click', function() {
+          localStorage.setItem('lastPublish', new Date().toISOString());
+          document.getElementById('publishMsg').style.display = 'block';
         });
       }
     });
