@@ -182,6 +182,7 @@
   <nav class="admin-nav">
     <ul>
       <li><a href="hero-edit.html">Sección principal</a></li>
+      <li><a href="banner-edit.html">Banners</a></li>
       <li><a href="products-edit.html">Productos</a></li>
       <li><a href="add-product.html">Añadir producto</a></li>
       <li><a href="menu-edit.html">Menú</a></li>
@@ -281,8 +282,9 @@
       if (logoutLink) {
         logoutLink.addEventListener('click', function(e) {
           e.preventDefault();
-          localStorage.removeItem('isLoggedIn');
-          window.location.href = 'login.html';
+               localStorage.removeItem('isLoggedIn');
+               localStorage.removeItem('loggedUser');
+               window.location.href = 'login.html';
         });
       }
     });

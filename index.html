@@ -611,6 +611,15 @@
         if (heroImageElem) heroImageElem.src = heroImage;
       }
 
+      // Actualizar imágenes del banner (slider) desde localStorage si existen
+      var sliderImages = document.querySelectorAll('.slider .slides img');
+      sliderImages.forEach(function(imgEl, idx) {
+        var storedBanner = localStorage.getItem('bannerImage' + idx);
+        if (storedBanner) {
+          imgEl.src = storedBanner;
+        }
+      });
+
       // Actualizar elementos del menú
       for (var i = 0; i < 6; i++) {
         var nameKey = 'menuName' + i;

@@ -37,6 +37,7 @@
   <nav class="admin-nav">
     <ul>
       <li><a href="hero-edit.html">Sección principal</a></li>
+      <li><a href="banner-edit.html">Banners</a></li>
       <li><a href="products-edit.html">Productos</a></li>
       <li><a href="add-product.html">Añadir producto</a></li>
       <li><a href="menu-edit.html">Menú</a></li>
@@ -53,6 +54,7 @@
     <p>Desde aquí podrás:</p>
     <ul>
       <li>Editar la sección principal (título, subtítulo, código de descuento e imagen).</li>
+      <li>Editar los banners del slider de inicio.</li>
       <li>Gestionar todos tus productos: nombres, precios, imágenes y enlaces de WhatsApp.</li>
       <li>Añadir nuevos productos al catálogo.</li>
       <li>Modificar los elementos del menú de navegación.</li>
@@ -68,8 +70,9 @@
       if (logoutLink) {
         logoutLink.addEventListener('click', function(e) {
           e.preventDefault();
-          localStorage.removeItem('isLoggedIn');
-          window.location.href = 'login.html';
+               localStorage.removeItem('isLoggedIn');
+               localStorage.removeItem('loggedUser');
+               window.location.href = 'login.html';
         });
       }
     });

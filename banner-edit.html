@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Banners - Forcebat Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f2f5;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    header img { height: 40px; }
+    header h1 { font-size: 20px; font-weight: 700; margin: 0 20px; }
+    header a { color: #ffc600; text-decoration: none; font-weight: 600; font-size: 14px; }
+    .admin-nav {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+    }
+    .admin-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+    }
+    .admin-nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .admin-nav ul li a:hover { background: #ffc600; color: #000; }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+    .card h2 {
+      font-size: 26px;
+      margin-bottom: 25px;
+      color: #222;
+      border-left: 6px solid #ffc600;
+      padding-left: 12px;
+    }
+    .form-group { margin-bottom: 25px; }
+    .form-group label { font-weight: 600; margin-bottom: 8px; display: block; }
+    .form-group input[type="file"] { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; }
+    .banner-preview { text-align: center; margin-top: 10px; }
+    .banner-preview img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+    }
+    /* Publish button styles reused */
+    .btn-publish {
+      background: #ffc600;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+      margin-top: 10px;
+    }
+    .btn-publish:hover { background: #e6b500; }
+    .btn-publish:active { transform: scale(0.98); }
+    .publish-message { font-size: 14px; color: #27ae60; margin-top: 10px; display: none; }
+  </style>
+</head>
+<body>
+  <!-- Redirección a la página de login si no está logueado -->
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  </script>
+  <header>
+    <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
+    <h1>Panel de Administración</h1>
+    <a href="index.html">Volver al sitio</a>
+  </header>
+  <!-- Navegación del panel de administración -->
+  <nav class="admin-nav">
+    <ul>
+      <li><a href="hero-edit.html">Sección principal</a></li>
+      <li><a href="banner-edit.html">Banners</a></li>
+      <li><a href="products-edit.html">Productos</a></li>
+      <li><a href="add-product.html">Añadir producto</a></li>
+      <li><a href="menu-edit.html">Menú</a></li>
+      <li><a href="contact-edit.html">Contacto</a></li>
+      <li><a href="stats.html">Estadísticas</a></li>
+      <li><a href="users-edit.html">Usuarios</a></li>
+      <li><a href="publish.html">Publicar</a></li>
+      <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+  <!-- Formulario para editar banners -->
+  <div class="card">
+    <h2>Editar Banners</h2>
+    <div class="form-group">
+      <label for="banner-input-0">Banner 1</label>
+      <div class="banner-preview"><img id="banner-preview-0" src="slide1.png" alt="Banner 1"></div>
+      <input type="file" id="banner-input-0" accept="image/*">
+    </div>
+    <div class="form-group">
+      <label for="banner-input-1">Banner 2</label>
+      <div class="banner-preview"><img id="banner-preview-1" src="slide2.png" alt="Banner 2"></div>
+      <input type="file" id="banner-input-1" accept="image/*">
+    </div>
+    <div class="form-group">
+      <label for="banner-input-2">Banner 3</label>
+      <div class="banner-preview"><img id="banner-preview-2" src="slide3.png" alt="Banner 3"></div>
+      <input type="file" id="banner-input-2" accept="image/*">
+    </div>
+    <p class="note">Resolución recomendada: 1200×400 px.</p>
+  </div>
+  <!-- Sección para publicar cambios -->
+  <div class="card">
+    <h2>Publicar cambios</h2>
+    <p>Haz clic para guardar todas tus modificaciones.</p>
+    <button class="btn-publish" id="publishBtn">Publicar cambios</button>
+    <p class="publish-message" id="publishMsg">¡Cambios publicados correctamente!</p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cargar vistas previas desde localStorage si existen y configurar inputs
+      var previewEls = [
+        document.getElementById('banner-preview-0'),
+        document.getElementById('banner-preview-1'),
+        document.getElementById('banner-preview-2')
+      ];
+      var inputEls = [
+        document.getElementById('banner-input-0'),
+        document.getElementById('banner-input-1'),
+        document.getElementById('banner-input-2')
+      ];
+      previewEls.forEach(function(imgEl, idx) {
+        var stored = localStorage.getItem('bannerImage' + idx);
+        if (stored) {
+          imgEl.src = stored;
+        }
+        inputEls[idx].addEventListener('change', function(e) {
+          var file = e.target.files[0];
+          if (file) {
+            var reader = new FileReader();
+            reader.onload = function(ev) {
+              var dataUrl = ev.target.result;
+              imgEl.src = dataUrl;
+              localStorage.setItem('bannerImage' + idx, dataUrl);
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+      });
+      // Logout functionality
+      var logoutLink = document.getElementById('logoutLink');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('loggedUser');
+          window.location.href = 'login.html';
+        });
+      }
+      // Publicar cambios
+      var pubBtn = document.getElementById('publishBtn');
+      if (pubBtn) {
+        pubBtn.addEventListener('click', function() {
+          localStorage.setItem('lastPublish', new Date().toISOString());
+          document.getElementById('publishMsg').style.display = 'block';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
