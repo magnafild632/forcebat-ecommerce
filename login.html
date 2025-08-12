@@ -87,14 +87,25 @@
     </form>
   </div>
   <script>
+    // Configurar usuario por defecto si no existen usuarios guardados
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!localStorage.getItem('users')) {
+        var defaultUsers = [{username: 'admin', password: '12345'}];
+        localStorage.setItem('users', JSON.stringify(defaultUsers));
+      }
+    });
     // Manejar envío del formulario de inicio de sesión
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
       var user = document.getElementById('username').value.trim();
       var pass = document.getElementById('password').value.trim();
-      // Credenciales simples, se pueden cambiar según necesidad
-      if (user === 'admin' && pass === '12345') {
+      var users = JSON.parse(localStorage.getItem('users')) || [];
+      var found = users.find(function(u) {
+        return u.username === user && u.password === pass;
+      });
+      if (found) {
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('loggedUser', found.username);
         window.location.href = 'admin.html';
       } else {
         document.getElementById('errorMsg').style.display = 'block';

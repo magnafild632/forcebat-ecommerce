@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrar usuarios - Forcebat Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f2f2f5;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+      margin-bottom: 40px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    header img {
+      height: 40px;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 20px;
+    }
+    header a {
+      color: #ffc600;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .admin-nav {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+    }
+    .admin-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+    }
+    .admin-nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .admin-nav ul li a:hover {
+      background: #ffc600;
+      color: #000;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .card h2 {
+      margin-bottom: 15px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background: #f7f7f7;
+    }
+    td input[type="text"],
+    td input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 12px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button.save-user {
+      background: #4CAF50;
+      color: #fff;
+    }
+    button.delete-user {
+      background: #e74c3c;
+      color: #fff;
+    }
+    #addUserButton {
+      background: #ffc600;
+      color: #000;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Redirección a la página de login si no está logueado -->
+  <script>
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+  </script>
+  <header>
+    <a href="index.html"><img src="logo.jpeg" alt="Forcebat Logo"></a>
+    <h1>Panel de Administración</h1>
+    <a href="index.html">Volver al sitio</a>
+  </header>
+  <!-- Navegación superior -->
+  <nav class="admin-nav">
+    <ul>
+      <li><a href="hero-edit.html">Sección principal</a></li>
+      <li><a href="products-edit.html">Productos</a></li>
+      <li><a href="add-product.html">Añadir producto</a></li>
+      <li><a href="menu-edit.html">Menú</a></li>
+      <li><a href="contact-edit.html">Contacto</a></li>
+      <li><a href="stats.html">Estadísticas</a></li>
+      <li><a href="users-edit.html">Usuarios</a></li>
+      <li><a href="publish.html">Publicar</a></li>
+      <li><a href="#" id="logoutLink">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+  <!-- Lista de usuarios -->
+  <div class="card">
+    <h2>Usuarios existentes</h2>
+    <table id="userTable">
+      <thead>
+        <tr><th>Usuario</th><th>Contraseña</th><th>Acciones</th></tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <!-- Formulario para agregar nuevo usuario -->
+  <div class="card">
+    <h2>Crear nuevo usuario</h2>
+    <div class="form-group">
+      <label for="newUserName">Usuario</label>
+      <input type="text" id="newUserName" placeholder="Nombre de usuario">
+    </div>
+    <div class="form-group">
+      <label for="newUserPassword">Contraseña</label>
+      <input type="password" id="newUserPassword" placeholder="Contraseña">
+    </div>
+    <button id="addUserButton">Agregar</button>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Cargar usuarios iniciales o establecer uno por defecto
+      if (!localStorage.getItem('users')) {
+        var initialUsers = [{username: 'admin', password: '12345'}];
+        localStorage.setItem('users', JSON.stringify(initialUsers));
+      }
+      // Elementos
+      var userTableBody = document.querySelector('#userTable tbody');
+      function renderUsers() {
+        userTableBody.innerHTML = '';
+        var users = JSON.parse(localStorage.getItem('users')) || [];
+        users.forEach(function(user, index) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<td><input type="text" class="user-name" data-index="' + index + '" value="' + user.username + '"></td>' +
+                         '<td><input type="password" class="user-password" data-index="' + index + '" value="' + user.password + '"></td>' +
+                         '<td><button class="save-user" data-index="' + index + '">Guardar</button>' +
+                         '<button class="delete-user" data-index="' + index + '">Eliminar</button></td>';
+          userTableBody.appendChild(tr);
+        });
+      }
+      renderUsers();
+      // Agregar usuario
+      document.getElementById('addUserButton').addEventListener('click', function() {
+        var name = document.getElementById('newUserName').value.trim();
+        var pass = document.getElementById('newUserPassword').value;
+        if (name && pass) {
+          var users = JSON.parse(localStorage.getItem('users')) || [];
+          users.push({username: name, password: pass});
+          localStorage.setItem('users', JSON.stringify(users));
+          document.getElementById('newUserName').value = '';
+          document.getElementById('newUserPassword').value = '';
+          renderUsers();
+        }
+      });
+      // Manejar guardar y eliminar
+      document.getElementById('userTable').addEventListener('click', function(e) {
+        var target = e.target;
+        var index = target.dataset.index;
+        if (target.classList.contains('save-user')) {
+          var users = JSON.parse(localStorage.getItem('users')) || [];
+          var newName = userTableBody.querySelector('input.user-name[data-index="' + index + '"]').value.trim();
+          var newPass = userTableBody.querySelector('input.user-password[data-index="' + index + '"]').value;
+          users[index] = {username: newName, password: newPass};
+          localStorage.setItem('users', JSON.stringify(users));
+          renderUsers();
+        } else if (target.classList.contains('delete-user')) {
+          var users = JSON.parse(localStorage.getItem('users')) || [];
+          users.splice(index, 1);
+          localStorage.setItem('users', JSON.stringify(users));
+          renderUsers();
+        }
+      });
+      // Cerrar sesión
+      var logoutLink = document.getElementById('logoutLink');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('loggedUser');
+          window.location.href = 'login.html';
+        });
+      }
+    });
+  </script>
+</body>
+</html>
