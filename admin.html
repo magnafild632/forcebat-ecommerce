@@ -233,6 +233,52 @@
         width: 100%;
       }
     }
+
+    /* Navegación del panel de administración */
+    .admin-nav {
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 40px;
+    }
+    .admin-nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 12px;
+      margin: 0;
+    }
+    .admin-nav ul li a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .admin-nav ul li a:hover {
+      background: #ffc600;
+      color: #000;
+    }
+
+    /* Estilos para la tabla de estadísticas de clics */
+    .stats-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-bottom: 1px solid #eee;
+    }
+    .stats-row:last-child {
+      border-bottom: none;
+    }
+    .stats-row .stats-name {
+      font-weight: 600;
+    }
+    .stats-row .stats-count {
+      color: #e67e22;
+    }
   </style>
 </head>
 <body>
@@ -241,6 +287,19 @@
     <h1>Panel de Administración</h1>
     <a href="index.html">Volver al sitio</a>
   </header>
+
+  <!-- Navegación del panel de administración -->
+  <nav class="admin-nav">
+    <ul>
+      <li><a href="#hero-edit">Sección principal</a></li>
+      <li><a href="#products-edit">Productos</a></li>
+      <li><a href="#add-product-card">Añadir producto</a></li>
+      <li><a href="#menu-edit">Menú</a></li>
+      <li><a href="#contact-edit">Contacto</a></li>
+      <li><a href="#dashboard-clicks">Estadísticas</a></li>
+      <li><a href="#publish-card">Publicar</a></li>
+    </ul>
+  </nav>
 
   <!-- Card para editar el hero -->
   <div class="card" id="hero-edit">
@@ -549,6 +608,13 @@
     </div>
   </div>
 
+  <!-- Card para mostrar estadísticas de clics -->
+  <div class="card" id="dashboard-clicks">
+    <h2>Estadísticas de Clics</h2>
+    <p>Monitorea cuántas veces se ha hecho clic en cada enlace de WhatsApp.</p>
+    <div id="clickStatsContainer"></div>
+  </div>
+
   <!-- Card para guardar/publicar cambios -->
   <div class="card" id="publish-card">
     <h2>Guardar/Publicar Cambios</h2>
@@ -599,6 +665,29 @@
         reader.readAsDataURL(file);
       });
     }
+
+    // Construir las estadísticas de clics para todos los productos
+    function buildClickStats() {
+      var statsContainer = document.getElementById('clickStatsContainer');
+      if (!statsContainer) return;
+      // Limpiar contenido existente
+      statsContainer.innerHTML = '';
+      // Obtener todas las tarjetas de productos
+      var productCards = document.querySelectorAll('.product-card');
+      for (var i = 0; i < productCards.length; i++) {
+        // Obtener nombre del producto (desde el campo de edición)
+        var nameInput = document.getElementById('name' + i);
+        var productName = nameInput ? nameInput.value : ('Producto ' + (i + 1));
+        // Obtener clicks almacenados en localStorage
+        var clicks = localStorage.getItem('productClicks' + i) || 0;
+        // Crear fila de estadística
+        var row = document.createElement('div');
+        row.className = 'stats-row';
+        row.innerHTML = '<span class="stats-name">' + productName + '</span>' +
+                        '<span class="stats-count">' + clicks + '</span>';
+        statsContainer.appendChild(row);
+      }
+    }
     // Adjuntar escuchadores a los productos existentes
     var initialProducts = document.querySelectorAll('.product-card');
     for (let i = 0; i < initialProducts.length; i++) {
@@ -620,6 +709,9 @@
         if (linkInput) linkInput.value = storedLink;
       }
     }
+
+    // Construir estadísticas de clics inicialmente
+    buildClickStats();
 
     // Manejar la adición de un nuevo producto
     document.getElementById('addProductButton').addEventListener('click', function() {
@@ -644,6 +736,8 @@
       container.appendChild(card);
       // Adjuntar listeners al nuevo producto
       attachProductListeners(index);
+      // Reconstruir estadísticas de clics después de añadir
+      buildClickStats();
       // Limpiar campos del nuevo producto
       document.getElementById('newProdName').value = '';
       document.getElementById('newProdPrice').value = '';
@@ -707,6 +801,9 @@
 
       // Mostrar mensaje de confirmación
       document.getElementById('publishMessage').style.display = 'block';
+
+      // Actualizar estadísticas de clics después de publicar
+      buildClickStats();
     });
   </script>
 </body>
