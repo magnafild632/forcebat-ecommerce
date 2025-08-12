@@ -18,6 +18,12 @@
     .admin-nav ul li a:hover { background: #ffc600; color: #000; }
     .card { background: #fff; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.05); padding: 30px; margin-bottom: 40px; overflow: hidden; }
     .card h2 { font-size: 26px; margin-bottom: 25px; color: #222; border-left: 6px solid #ffc600; padding-left: 12px; }
+    /* Resumen de métricas */
+    .stats-summary { display: flex; gap: 20px; flex-wrap: wrap; }
+    .stats-summary .metric { background: #f7f7f7; border-radius: 8px; padding: 20px; flex: 1; min-width: 150px; text-align: center; }
+    .stats-summary .metric h3 { margin-bottom: 8px; font-size: 18px; color: #222; }
+    .stats-summary .metric p { font-size: 20px; font-weight: bold; color: #000; }
+    .chart-container { position: relative; height: 400px; width: 100%; }
     /* Tabla de estadísticas */
     table { width: 100%; border-collapse: collapse; }
     th, td { padding: 12px; text-align: left; font-size: 15px; }
@@ -59,24 +65,237 @@
       </tbody>
     </table>
   </div>
+  <!-- Librería Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Resumen de métricas -->
+  <div class="card">
+    <h2>Resumen de métricas</h2>
+    <div class="stats-summary">
+      <div class="metric">
+        <h3>Total de visitas</h3>
+        <p id="totalVisits">0</p>
+      </div>
+      <div class="metric">
+        <h3>Total de clics</h3>
+        <p id="totalClicks">0</p>
+      </div>
+      <div class="metric">
+        <h3>Tasa de conversión</h3>
+        <p id="conversionRate">0%</p>
+      </div>
+      <div class="metric">
+        <h3>Producto más clicado</h3>
+        <p id="topProduct">-</p>
+      </div>
+    </div>
+  </div>
+  <!-- Gráfico de clics por producto -->
+  <div class="card">
+    <h2>Gráfico de clics por producto</h2>
+    <div class="chart-container">
+      <canvas id="clicksChart"></canvas>
+    </div>
+  </div>
+  <!-- Parámetros de ventas -->
+  <div class="card">
+    <h2>Parámetros de ventas</h2>
+    <div class="stats-summary">
+      <div class="metric">
+        <h3>Total de productos</h3>
+        <p id="totalProducts">0</p>
+      </div>
+      <div class="metric">
+        <h3>Precio promedio</h3>
+        <p id="avgPrice">0</p>
+      </div>
+      <div class="metric">
+        <h3>Clicks promedio</h3>
+        <p id="avgClicks">0</p>
+      </div>
+      <div class="metric">
+        <h3>Ingreso potencial</h3>
+        <p id="potentialRevenue">0</p>
+      </div>
+    </div>
+  </div>
+  <!-- Gráfico de ingresos por producto -->
+  <div class="card">
+    <h2>Gráfico de ingresos por producto</h2>
+    <div class="chart-container">
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
   <script>
-    function buildStats() {
-      var tbody = document.getElementById('statsBody');
-      tbody.innerHTML = '';
-      var count = parseInt(localStorage.getItem('productCount'));
-      if (isNaN(count) || count < 1) {
-        // suponer 6 productos predeterminados si no hay contadores
-        count = 6;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Construir la tabla de estadísticas y recopilar datos para gráficos y métricas
+      function buildStats() {
+        var tbody = document.getElementById('statsBody');
+        tbody.innerHTML = '';
+        var count = parseInt(localStorage.getItem('productCount'));
+        if (isNaN(count) || count < 1) {
+          count = 6; // asumir 6 productos predeterminados si no hay contadores
+        }
+        var labels = [];
+        var dataClicks = [];
+        var totalClicks = 0;
+        for (var i = 0; i < count; i++) {
+          var name = localStorage.getItem('productName' + i) || 'Producto ' + (i + 1);
+          var clicks = parseInt(localStorage.getItem('productClicks' + i)) || 0;
+          totalClicks += clicks;
+          labels.push(name);
+          dataClicks.push(clicks);
+          var row = document.createElement('tr');
+          row.innerHTML = '<td>' + (i + 1) + '</td><td>' + name + '</td><td>' + clicks + '</td>';
+          tbody.appendChild(row);
+        }
+        return { labels: labels, data: dataClicks, totalClicks: totalClicks };
       }
-      for (var i = 0; i < count; i++) {
-        var name = localStorage.getItem('productName' + i) || 'Producto ' + (i + 1);
-        var clicks = localStorage.getItem('productClicks' + i) || 0;
-        var row = document.createElement('tr');
-        row.innerHTML = '<td>' + (i + 1) + '</td><td>' + name + '</td><td>' + clicks + '</td>';
-        tbody.appendChild(row);
+
+      var stats = buildStats();
+      // Métricas de visitas y clics
+      var visits = parseInt(localStorage.getItem('visitCount')) || 0;
+      document.getElementById('totalVisits').innerText = visits;
+      document.getElementById('totalClicks').innerText = stats.totalClicks;
+      var conversion = visits > 0 ? ((stats.totalClicks / visits) * 100).toFixed(2) + '%' : '0%';
+      document.getElementById('conversionRate').innerText = conversion;
+
+      // Determinar el producto con más clics
+      var maxClicks = 0;
+      var topProductName = '-';
+      for (var m = 0; m < stats.data.length; m++) {
+        if (stats.data[m] > maxClicks) {
+          maxClicks = stats.data[m];
+          topProductName = stats.labels[m];
+        }
       }
-    }
-    buildStats();
+      document.getElementById('topProduct').innerText = topProductName;
+
+      // Crear gráfico de barras para clics por producto
+      var ctx = document.getElementById('clicksChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: stats.labels,
+          datasets: [{
+            label: 'Clics',
+            data: stats.data,
+            backgroundColor: 'rgba(255, 198, 0, 0.6)',
+            borderColor: '#ffc600',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Clics'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Producto'
+              },
+              ticks: {
+                autoSkip: false,
+                maxRotation: 45,
+                minRotation: 45
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            }
+          }
+        }
+      });
+
+      // Calcular métricas de ventas y crear gráfico de ingresos por producto
+      (function() {
+        var count = parseInt(localStorage.getItem('productCount'));
+        if (isNaN(count) || count < 1) {
+          count = 6;
+        }
+        var totalProducts = count;
+        var sumPrices = 0;
+        var avgClicks = stats.totalClicks / count;
+        var potentialRevenue = 0;
+        var revenueLabels = [];
+        var revenueData = [];
+        for (var i = 0; i < count; i++) {
+          var priceStr = localStorage.getItem('productPrice' + i);
+          var priceVal = 0;
+          if (priceStr) {
+            // eliminar cualquier caracter no numérico salvo dígitos
+            var numeric = priceStr.replace(/[^0-9]/g, '');
+            priceVal = parseInt(numeric) || 0;
+          }
+          sumPrices += priceVal;
+          var clicks = parseInt(localStorage.getItem('productClicks' + i)) || 0;
+          var revenue = priceVal * clicks;
+          potentialRevenue += revenue;
+          revenueLabels.push(stats.labels[i] || ('Producto ' + (i + 1)));
+          revenueData.push(revenue);
+        }
+        var avgPrice = sumPrices / totalProducts;
+        // Actualizar métricas de ventas
+        document.getElementById('totalProducts').innerText = totalProducts;
+        document.getElementById('avgPrice').innerText = avgPrice.toLocaleString('es-PY', { style: 'currency', currency: 'PYG', minimumFractionDigits: 0 });
+        document.getElementById('avgClicks').innerText = avgClicks.toFixed(2);
+        document.getElementById('potentialRevenue').innerText = potentialRevenue.toLocaleString('es-PY', { style: 'currency', currency: 'PYG', minimumFractionDigits: 0 });
+        // Crear gráfico de ingresos por producto
+        var ctxRev = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctxRev, {
+          type: 'bar',
+          data: {
+            labels: revenueLabels,
+            datasets: [{
+              label: 'Ingresos',
+              data: revenueData,
+              backgroundColor: 'rgba(0, 123, 255, 0.5)',
+              borderColor: '#007bff',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Ingreso (Gs)'
+                }
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: 'Producto'
+                },
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 45,
+                  minRotation: 45
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                display: false
+              }
+            }
+          }
+        });
+      })();
+    });
   </script>
 </body>
 </html>

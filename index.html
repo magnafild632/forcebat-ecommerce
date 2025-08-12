@@ -586,6 +586,9 @@
   <!-- Script para aplicar los cambios guardados desde el panel de administración -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Incrementar contador de visitas cada vez que se carga la página
+      var currentVisits = parseInt(localStorage.getItem('visitCount')) || 0;
+      localStorage.setItem('visitCount', currentVisits + 1);
       // Actualizar sección principal (hero)
       var heroTitle = localStorage.getItem('heroTitle');
       var heroSubtitle = localStorage.getItem('heroSubtitle');
