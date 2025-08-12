@@ -201,6 +201,13 @@
     .contact-preview div {
       margin-bottom: 6px;
     }
+
+        /* Style for click statistics display */
+        .click-stats {
+          margin-bottom: 10px;
+          font-size: 14px;
+          color: #666;
+        }
     .contact-preview .label {
       font-weight: 600;
       margin-right: 5px;
@@ -283,6 +290,13 @@
           <label for="uploadProd0">Cambiar imagen:</label>
           <input type="file" id="uploadProd0" accept="image/*">
         </div>
+        <div class="click-stats">
+          Clicks: <span id="clicks0">0</span>
+        </div>
+        <div class="form-group">
+          <label for="link0">Enlace de WhatsApp:</label>
+          <input type="text" id="link0" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
+        </div>
       </div>
       <!-- Producto 2 -->
       <div class="product-card" data-index="1">
@@ -300,6 +314,13 @@
         <div class="form-group">
           <label for="uploadProd1">Cambiar imagen:</label>
           <input type="file" id="uploadProd1" accept="image/*">
+        </div>
+        <div class="click-stats">
+          Clicks: <span id="clicks1">0</span>
+        </div>
+        <div class="form-group">
+          <label for="link1">Enlace de WhatsApp:</label>
+          <input type="text" id="link1" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
         </div>
       </div>
       <!-- Producto 3 -->
@@ -319,6 +340,13 @@
           <label for="uploadProd2">Cambiar imagen:</label>
           <input type="file" id="uploadProd2" accept="image/*">
         </div>
+        <div class="click-stats">
+          Clicks: <span id="clicks2">0</span>
+        </div>
+        <div class="form-group">
+          <label for="link2">Enlace de WhatsApp:</label>
+          <input type="text" id="link2" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
+        </div>
       </div>
       <!-- Producto 4 -->
       <div class="product-card" data-index="3">
@@ -336,6 +364,13 @@
         <div class="form-group">
           <label for="uploadProd3">Cambiar imagen:</label>
           <input type="file" id="uploadProd3" accept="image/*">
+        </div>
+        <div class="click-stats">
+          Clicks: <span id="clicks3">0</span>
+        </div>
+        <div class="form-group">
+          <label for="link3">Enlace de WhatsApp:</label>
+          <input type="text" id="link3" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
         </div>
       </div>
       <!-- Producto 5 -->
@@ -355,6 +390,13 @@
           <label for="uploadProd4">Cambiar imagen:</label>
           <input type="file" id="uploadProd4" accept="image/*">
         </div>
+        <div class="click-stats">
+          Clicks: <span id="clicks4">0</span>
+        </div>
+        <div class="form-group">
+          <label for="link4">Enlace de WhatsApp:</label>
+          <input type="text" id="link4" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
+        </div>
       </div>
       <!-- Producto 6 -->
       <div class="product-card" data-index="5">
@@ -373,6 +415,13 @@
           <label for="uploadProd5">Cambiar imagen:</label>
           <input type="file" id="uploadProd5" accept="image/*">
         </div>
+        <div class="click-stats">
+          Clicks: <span id="clicks5">0</span>
+        </div>
+        <div class="form-group">
+          <label for="link5">Enlace de WhatsApp:</label>
+          <input type="text" id="link5" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
+        </div>
       </div>
     </div>
   </div>
@@ -390,6 +439,11 @@
     <div class="form-group">
       <label for="newProdImage">Imagen:</label>
       <input type="file" id="newProdImage" accept="image/*">
+    </div>
+
+    <div class="form-group">
+      <label for="newProdLink">Enlace de WhatsApp:</label>
+      <input type="text" id="newProdLink" value="https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat">
     </div>
     <button id="addProductButton" class="btn-publish">Añadir Producto</button>
   </div>
@@ -551,12 +605,30 @@
       attachProductListeners(i);
     }
 
+    // Inicializar valores de clics y enlaces para cada producto en el panel
+    for (let i = 0; i < initialProducts.length; i++) {
+      // Actualizar contador de clics desde localStorage
+      var storedClicks = localStorage.getItem('productClicks' + i);
+      if (storedClicks) {
+        var clickSpan = document.getElementById('clicks' + i);
+        if (clickSpan) clickSpan.innerText = storedClicks;
+      }
+      // Actualizar enlace de WhatsApp desde localStorage
+      var storedLink = localStorage.getItem('productLink' + i);
+      if (storedLink) {
+        var linkInput = document.getElementById('link' + i);
+        if (linkInput) linkInput.value = storedLink;
+      }
+    }
+
     // Manejar la adición de un nuevo producto
     document.getElementById('addProductButton').addEventListener('click', function() {
       var container = document.querySelector('.product-edit');
       var index = container.children.length;
       var nameVal = document.getElementById('newProdName').value || ('Producto ' + (index + 1));
       var priceVal = document.getElementById('newProdPrice').value || '0';
+      // Enlace personalizado o valor predeterminado
+      var linkVal = document.getElementById('newProdLink').value || 'https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat';
       // Crear tarjeta de producto
       var card = document.createElement('div');
       card.className = 'product-card';
@@ -566,7 +638,9 @@
         '<div class="price-preview">Gs <span id="prodPrice' + index + '">' + priceVal + '</span></div>' +
         '<div class="form-group"><label for="name' + index + '">Nombre:</label><input type="text" id="name' + index + '" value="' + nameVal + '"></div>' +
         '<div class="form-group"><label for="price' + index + '">Precio (Gs):</label><input type="text" id="price' + index + '" value="' + priceVal + '"></div>' +
-        '<div class="form-group"><label for="uploadProd' + index + '">Cambiar imagen:</label><input type="file" id="uploadProd' + index + '" accept="image/*"></div>';
+        '<div class="form-group"><label for="uploadProd' + index + '">Cambiar imagen:</label><input type="file" id="uploadProd' + index + '" accept="image/*"></div>' +
+        '<div class="click-stats">Clicks: <span id="clicks' + index + '">0</span></div>' +
+        '<div class="form-group"><label for="link' + index + '">Enlace de WhatsApp:</label><input type="text" id="link' + index + '" value="' + linkVal + '"></div>';
       container.appendChild(card);
       // Adjuntar listeners al nuevo producto
       attachProductListeners(index);
@@ -574,6 +648,7 @@
       document.getElementById('newProdName').value = '';
       document.getElementById('newProdPrice').value = '';
       document.getElementById('newProdImage').value = '';
+      document.getElementById('newProdLink').value = '';
     });
 
     // Actualizar nombres y enlaces del menú
@@ -612,6 +687,11 @@
         localStorage.setItem('productName' + i, document.getElementById('name' + i).value);
         localStorage.setItem('productPrice' + i, document.getElementById('price' + i).value);
         localStorage.setItem('productImage' + i, document.getElementById('prodImg' + i).src);
+        // Guardar enlace personalizado de WhatsApp
+        var linkInputEl = document.getElementById('link' + i);
+        if (linkInputEl) {
+          localStorage.setItem('productLink' + i, linkInputEl.value);
+        }
       }
 
       // Guardar datos del menú

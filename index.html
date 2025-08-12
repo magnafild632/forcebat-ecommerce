@@ -688,12 +688,23 @@
           var priceEl = document.createElement('div');
           priceEl.className = 'price';
           priceEl.innerText = 'Gs ' + price;
+          // Obtener enlace personalizado de WhatsApp (o usar predeterminado)
+          var pLinkStored = localStorage.getItem('productLink' + j);
+          var linkHref = pLinkStored || 'https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat';
           var btnEl = document.createElement('a');
-          btnEl.href = 'https://wa.me/595971325695?text=Hola%20estoy%20interesado%20en%20una%20batería%20Forcebat';
+          btnEl.href = linkHref;
           btnEl.className = 'btn whatsapp';
-          btnEl.setAttribute('target', '_blank');
-          btnEl.setAttribute('rel', 'noopener');
           btnEl.innerText = 'Comprar por WhatsApp';
+          // Registrar clics en el enlace de WhatsApp
+          (function(index, href) {
+            btnEl.addEventListener('click', function(e) {
+              e.preventDefault();
+              var currentClicks = parseInt(localStorage.getItem('productClicks' + index)) || 0;
+              localStorage.setItem('productClicks' + index, currentClicks + 1);
+              // Abrir el enlace en una nueva pestaña después de contar el clic
+              window.open(href, '_blank');
+            });
+          })(j, linkHref);
           card.appendChild(imgEl);
           card.appendChild(nameEl);
           card.appendChild(priceEl);
