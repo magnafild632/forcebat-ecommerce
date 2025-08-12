@@ -166,24 +166,31 @@
         document.getElementById('banner-input-1'),
         document.getElementById('banner-input-2')
       ];
-      previewEls.forEach(function(imgEl, idx) {
-        var stored = localStorage.getItem('bannerImage' + idx);
+      // Usamos un bucle for con "let" para asegurar que el índice y la
+      // referencia de cada vista previa e input quedan correctamente
+      // capturados en el ámbito del listener. Esto evita problemas al
+      // actualizar banners 2 y 3 con algunas implementaciones de closures.
+      for (let i = 0; i < previewEls.length; i++) {
+        // Si hay una imagen almacenada en localStorage, actualizamos la vista previa
+        var stored = localStorage.getItem('bannerImage' + i);
         if (stored) {
-          imgEl.src = stored;
+          previewEls[i].src = stored;
         }
-        inputEls[idx].addEventListener('change', function(e) {
-          var file = e.target.files[0];
+        // Listener para cambios en el input de archivo
+        inputEls[i].addEventListener('change', function(e) {
+          var file = this.files[0];
           if (file) {
             var reader = new FileReader();
             reader.onload = function(ev) {
               var dataUrl = ev.target.result;
-              imgEl.src = dataUrl;
-              localStorage.setItem('bannerImage' + idx, dataUrl);
+              // Actualizamos la imagen de previsualización y guardamos en localStorage
+              previewEls[i].src = dataUrl;
+              localStorage.setItem('bannerImage' + i, dataUrl);
             };
             reader.readAsDataURL(file);
           }
         });
-      });
+      }
       // Logout functionality
       var logoutLink = document.getElementById('logoutLink');
       if (logoutLink) {
